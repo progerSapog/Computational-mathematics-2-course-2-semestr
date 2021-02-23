@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+# IntelliJ project files
+/Laboratory_work1/.idea
+/Laboratory_work1/*.iml
+/Laboratory_work1/out
+/Laboratory_work1/gen
