@@ -6,7 +6,14 @@ package equation_solution_strategy;
  * */
 public class BisectionSolution implements SolutionStrategy {
     @Override
-    public double getSolution() {
+    public double getSolution(double a, double b) {
         return 0;
+
+    }
+
+    /**
+     * Конструктор без параметров.
+     * */
+    public BisectionSolution() {
     }
 }

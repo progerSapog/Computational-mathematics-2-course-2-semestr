@@ -1,5 +1,7 @@
 package equation;
 
+import java.util.*;
+
 /**
  * Класс Нелинейных уравнений третьей степени.
  * Реализует интерфейс Equation
@@ -99,31 +101,100 @@ public class NoLinearThirdDegreeEquation implements Equation {
      * @return значение функции в заданной точке
      * */
     @Override
-    public double getValueAtPoint(double x) {
+    public double getValueAtX(double x) {
         return getA()*Math.pow(x, 3) + getB()*Math.pow(x, 2) + getC()*x + getD();
     }
 
     /**
-     * Метод для получение значения первой производной в заданной точке
+     * Метод для получение значения первой производной при заданном x.
      *
      * @param x - точка, в которой необходимо получить значение первой производной
      * @return значение первой производной в заданной точке
      * */
     @Override
-    public double getFstDerivativeAtPoint(double x) {
-        return 3*getA()*Math.pow(x,2) + 2*getB()*x + getC();
+    public double getFstDerivativeAtX(double x) {
+        return 3*getA()*Math.pow(x,2) + 2.0*getB()*x + getC();
     }
 
     /**
-     * Метод для получение значения первой производной в заданной точке
+     * Метод для получение значения первой производной при заданном x.
      *
      * @param x - точка, в которой необходимо получить значение второй производной
      * @return значение второй производной в заданной точке
      * */
     @Override
-    public double getSecDerivativeAtPoint(double x) {
-        return 6*getA()*x + 2*getB();
+    public double getSecDerivativeAtX(double x) {
+        return 6.0*getA()*x + 2.0*getB();
     }
+
+    /**
+     * Метод для получения списка интервалов монотонности.
+     *   1. Получение значений функции в промежутке от -100 до 100
+     *   2. Выделение промежутков моноттности
+     *
+     * (К сожелению более адыкватного метода не нашлось)
+     *
+     * @return список из чисел, которые составляют отрезки монотонности
+     *         типа [i; i+1]
+     * */
+    @Override
+    public List<Double> getIntervalsOfMonotony() {
+         List<Double> xList = new LinkedList<>();
+         List<Double> yList = new LinkedList<>();
+
+         for (double i = -100.0; i <= 100; i++)
+         {
+             xList.add(i);
+         }
+
+        for (Double aDouble : xList) {
+            yList.add(getValueAtX(aDouble));
+        }
+
+         List<Double> newList = new LinkedList<>();
+         int index = 0;
+         for (; index < yList.size() - 1; index++)
+         {
+             if (yList.get(index) * yList.get(index+1) < 0)
+             {
+                 newList.add(xList.get(index));
+             }
+         }
+         newList.add((newList.get(newList.size() - 1) + 1));
+
+        return newList;
+    }
+
+//    Похоже данный метод лишний
+//    /**
+//     * Методя для получения экстремумов первой производной
+//     *
+//     * @return массив иксов при которых находитяся экстремумы
+//     * */
+//    public List<Double> getExtremumOfFstDerivative() {
+//        List<Double> xList = new LinkedList<>();
+//
+//        //Вычисление дискриминанта
+//        double discriminant = ((Math.pow(3*getA(), 2))) - (4*(3.0*getA())*getC());
+//
+//        //Вычисление x1 и x2, т.к. ур-е первой производной от
+//        //уравнения третьей степени является квадратным
+//        double x1 = ((2.0*(-getB()) + Math.sqrt(discriminant))/(2.0*3.0*getA()));
+//        double x2 = ((2.0*(-getB()) - Math.sqrt(discriminant))/(2.0*3.0*getA()));
+//
+//        if (x1 < x2)
+//        {
+//            xList.add(x1);
+//            xList.add(x2);
+//        }
+//        else
+//        {
+//            xList.add(x2);
+//            xList.add(x1);
+//        }
+//
+//        return xList;
+//    }
 
     /**
      * Конуструктор без параметров
