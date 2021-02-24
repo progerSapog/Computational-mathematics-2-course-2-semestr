@@ -43,10 +43,12 @@ public interface Equation {
     double getFstDerivativeAtX(double x);
 
     /**
+     * Метод для получения списка интервалов монотонности.
      *
-     *
-     * @return */
-    List<Double> getIntervalsOfMonotony();
+     * @return список из чисел, которые составляют отрезки монотонности
+     *         типа [i; i+1]
+     * */
+    List<List<Double>> getIntervalsOfMonotony();
 
     /**
      * Метод для получение значения первой производной в при заданном x.

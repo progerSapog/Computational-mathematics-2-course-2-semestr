@@ -18,8 +18,7 @@ public class Main {
         System.out.println();
 
         System.out.println("Интервалы: ");
-        List<Double> intervals = equation.getIntervalsOfMonotony();
+        List<List<Double>> intervals = equation.getIntervalsOfMonotony();
         System.out.println(intervals);
-
     }
 }

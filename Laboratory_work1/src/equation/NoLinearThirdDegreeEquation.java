@@ -138,31 +138,52 @@ public class NoLinearThirdDegreeEquation implements Equation {
      *         типа [i; i+1]
      * */
     @Override
-    public List<Double> getIntervalsOfMonotony() {
-         List<Double> xList = new LinkedList<>();
-         List<Double> yList = new LinkedList<>();
+    public List<List<Double>> getIntervalsOfMonotony() {
+        List<Double> xList = new LinkedList<>();
+        List<Double> yList = new LinkedList<>();
 
-         for (double i = -100.0; i <= 100; i++)
-         {
-             xList.add(i);
-         }
+        //Задаем интервал иксов от -100 до 100
+        for (double i = -100.0; i <= 100; i++)
+        {
+            xList.add(i);
+        }
 
+        //Получаем значения функии в каждой точке интервала
+        //от -100 до 100
         for (Double aDouble : xList) {
             yList.add(getValueAtX(aDouble));
         }
 
-         List<Double> newList = new LinkedList<>();
-         int index = 0;
-         for (; index < yList.size() - 1; index++)
-         {
-             if (yList.get(index) * yList.get(index+1) < 0)
-             {
-                 newList.add(xList.get(index));
-             }
-         }
-         newList.add((newList.get(newList.size() - 1) + 1));
+        //В коллекцию, которая может содержать только уникальные элементы
+        //вносим значения при которых функция меняет знак
+        Set<Double> uniqSet = new HashSet<>();
+        for (int i = 0; i < yList.size() - 1; i++)
+        {
+            if (yList.get(i) * yList.get(i+1) < 0)
+            {
+                uniqSet.add(xList.get(i));
+                uniqSet.add(xList.get(i+1));
+            }
+        }
 
-        return newList;
+        //Дублируем значения в промежуточный список и сортируем по возрастанию
+        List<Double> newList = new LinkedList<>(uniqSet);
+        Collections.sort(newList);
+
+        //Попарно объединяем значения в интервалы
+        List<List<Double>> cordList = new LinkedList<>();
+        for (int i = 0; i < newList.size() - 1; i++)
+        {
+            List<Double> tempList = new LinkedList<>();
+            if (Math.abs(newList.get(i) - newList.get(i + 1)) <= 1)
+            {
+                tempList.add(newList.get(i));
+                tempList.add(newList.get(i + 1));
+            }
+            if (!tempList.isEmpty()) cordList.add(tempList);
+        }
+
+        return cordList;
     }
 
 //    Похоже данный метод лишний
