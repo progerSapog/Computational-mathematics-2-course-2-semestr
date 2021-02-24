@@ -6,7 +6,13 @@ package equation_solution_strategy;
  * */
 public class NewtonSolution implements SolutionStrategy {
     @Override
-    public double getSolution() {
+    public double getSolution(double val1, double val2) {
         return 0;
+    }
+
+    /**
+     * Конструктор без параметров.
+     * */
+    public NewtonSolution() {
     }
 }
