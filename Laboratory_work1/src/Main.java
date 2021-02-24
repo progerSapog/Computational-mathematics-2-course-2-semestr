@@ -16,6 +16,8 @@ public class Main {
         System.out.printf("%.4f \n", equation.getSecDerivativeAtX(5));
 
         System.out.println();
+        System.out.println();
+        System.out.println();
 
         System.out.println("Интервалы: ");
         List<List<Double>> intervals = equation.getIntervalsOfMonotony();
