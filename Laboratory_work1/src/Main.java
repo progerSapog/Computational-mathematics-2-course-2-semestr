@@ -13,9 +13,16 @@ public class Main
         NoLinearThirdDegreeEquation equation = new NoLinearThirdDegreeEquation();
         Scanner scanner = new Scanner(System.in);
 
-        //Проверка на уравнении, которое было сделано на практике
-//        double[] coefficients = {2.0 , (-3.0), (-12.0), (-5.0)};  //УДОЛИ
-        double[] coefficients = {1.0 , 0.1, 0.4, (-1.2)};         //УДОЛИ
+/////////////////// ТЕСТ - УДОЛИ /////////////////////////
+//        double[] coefficients = {2.0 , (-3.0), (-12.0), (-5.0)};  //с практики
+
+//        double[] coefficients = {1.0, (-3.0), 9.0, (-8.0)};       //Вар 1
+//        double[] coefficients = {1.0, (-3.0), 6.0, (-5.0)};       //Вар 2
+//        double[] coefficients = {1.0, (-3.0), 6.0, 3.0};          //Вар 3
+//        double[] coefficients = {1.0, (-0.1), (-0.4), (-1.5)};    //Вар 4
+        double[] coefficients = {1.0, 0.1, 0.4, (-1.2)};          //Вар 15
+/////////////////// ТЕСТ - УДОЛИ /////////////////////////
+
         System.out.println("Программа для решения нелинейных уравнений 3ей степени.");
         System.out.println("\tОбщий вид таких уравнений: ");
         System.out.println("\t\ta*x^3 + b*x^2 + c*x + d = 0");
