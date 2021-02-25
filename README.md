@@ -11,4 +11,4 @@
   + :white_check_mark: Метод хорд   
   + :white_check_mark: Метод касательных 
   + :white_check_mark: Метод простой итерации 
-  + [] Отчет
+  + :black_square_button: Отчет
