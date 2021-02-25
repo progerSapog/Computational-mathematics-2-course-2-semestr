@@ -14,8 +14,8 @@ public class Main
         Scanner scanner = new Scanner(System.in);
 
         //Проверка на уравнении, которое было сделано на практике
-        double[] coefficients = {2.0 , (-3.0), (-12.0), (-5.0)};  //УДОЛИ
-//        double[] coefficients = {1.0 , 0.1, 0.4, (-1.2)};         //УДОЛИ
+//        double[] coefficients = {2.0 , (-3.0), (-12.0), (-5.0)};  //УДОЛИ
+        double[] coefficients = {1.0 , 0.1, 0.4, (-1.2)};         //УДОЛИ
         System.out.println("Программа для решения нелинейных уравнений 3ей степени.");
         System.out.println("\tОбщий вид таких уравнений: ");
         System.out.println("\t\ta*x^3 + b*x^2 + c*x + d = 0");
@@ -69,8 +69,8 @@ public class Main
             }
 
             Validator validator = ResponseValidator.getInstance();
-            validator.setParameter(0.2);
-//            validator.setParameter(0.0001);
+//            validator.setParameter(0.2);
+            validator.setParameter(0.0001);
 
             List<Double> res;
 
