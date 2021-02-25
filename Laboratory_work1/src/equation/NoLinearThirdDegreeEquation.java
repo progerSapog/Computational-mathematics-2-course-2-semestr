@@ -125,7 +125,6 @@ public class NoLinearThirdDegreeEquation implements Equation
      * @param x - точка, в которой необходимо получить значение первой производной
      * @return значение первой производной в заданной точке
      * */
-    @Override
     public double getFstDerivativeAtX(double x)
     {
         return 3*getA()*Math.pow(x,2) + 2.0*getB()*x + getC();
@@ -137,7 +136,6 @@ public class NoLinearThirdDegreeEquation implements Equation
      * @param x - точка, в которой необходимо получить значение второй производной
      * @return значение второй производной в заданной точке
      * */
-    @Override
     public double getSecDerivativeAtX(double x)
     {
         return 6.0*getA()*x + 2.0*getB();
@@ -153,7 +151,6 @@ public class NoLinearThirdDegreeEquation implements Equation
      * @return список из чисел, которые составляют отрезки монотонности
      *         типа [i; i+1]
      * */
-    @Override
     public List<List<Double>> getIntervalsOfMonotony()
     {
         List<Double> xList = new LinkedList<>();
@@ -202,37 +199,6 @@ public class NoLinearThirdDegreeEquation implements Equation
         }
         return cordList;
     }
-
-//    Похоже данный метод лишний
-//    /**
-//     * Методя для получения экстремумов первой производной
-//     *
-//     * @return массив иксов при которых находитяся экстремумы
-//     * */
-//    public List<Double> getExtremumOfFstDerivative() {
-//        List<Double> xList = new LinkedList<>();
-//
-//        //Вычисление дискриминанта
-//        double discriminant = ((Math.pow(3*getA(), 2))) - (4*(3.0*getA())*getC());
-//
-//        //Вычисление x1 и x2, т.к. ур-е первой производной от
-//        //уравнения третьей степени является квадратным
-//        double x1 = ((2.0*(-getB()) + Math.sqrt(discriminant))/(2.0*3.0*getA()));
-//        double x2 = ((2.0*(-getB()) - Math.sqrt(discriminant))/(2.0*3.0*getA()));
-//
-//        if (x1 < x2)
-//        {
-//            xList.add(x1);
-//            xList.add(x2);
-//        }
-//        else
-//        {
-//            xList.add(x2);
-//            xList.add(x1);
-//        }
-//
-//        return xList;
-//    }
 
     /**
      * Конуструктор без параметров

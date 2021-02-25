@@ -20,7 +20,7 @@ public class Main
 //        double[] coefficients = {1.0, (-3.0), 6.0, (-5.0)};       //Вар 2
 //        double[] coefficients = {1.0, (-3.0), 6.0, 3.0};          //Вар 3
 //        double[] coefficients = {1.0, (-0.1), (-0.4), (-1.5)};    //Вар 4
-        double[] coefficients = {1.0, 0.1, 0.4, (-1.2)};          //Вар 15
+//        double[] coefficients = {1.0, 0.1, 0.4, (-1.2)};          //Вар 15
 /////////////////// ТЕСТ - УДОЛИ /////////////////////////
 
         System.out.println("Программа для решения нелинейных уравнений 3ей степени.");
@@ -28,23 +28,33 @@ public class Main
         System.out.println("\t\ta*x^3 + b*x^2 + c*x + d = 0");
         System.out.println();
 
-//        //Ввод коэффициентов уравнения
-//        double[] coefficients = new double[4];
-//        System.out.print("Введите коэффициент a: ");
-//        coefficients[0] = scanner.nextDouble();
-//        System.out.print("Введите коэффициент b: ");
-//        coefficients[1] = scanner.nextDouble();
-//        System.out.print("Введите коэффициент c: ");
-//        coefficients[2] = scanner.nextDouble();
-//        System.out.print("Введите коэффициент d: ");
-//        coefficients[3] = scanner.nextDouble();
+        System.out.print("Введите точность ответа (epsilon): ");
+        double epsilon = scanner.nextDouble();
+        System.out.println();
+
+        //Ввод коэффициентов уравнения
+        double[] coefficients = new double[4];
+        System.out.print("Введите коэффициент a: ");
+        coefficients[0] = scanner.nextDouble();
+        System.out.print("Введите коэффициент b: ");
+        coefficients[1] = scanner.nextDouble();
+        System.out.print("Введите коэффициент c: ");
+        coefficients[2] = scanner.nextDouble();
+        System.out.print("Введите коэффициент d: ");
+        coefficients[3] = scanner.nextDouble();
+        System.out.println();
 
         //Запись введенных коэффициентов у равнение
         equation.setCoefficients(coefficients);
 
+        //Создание ссылки на объект, реализующий интерфейс
+        //SolutionStrategy
         SolutionStrategy strategy = null;
 
+        //Переменная для хранения результата ввода
         String ch;
+
+        //Сброс потока ввода
         ch = scanner.nextLine();
 
         //Выбор стратегии решения
@@ -75,18 +85,20 @@ public class Main
                 default    -> System.out.println("Неверный ввод!");
             }
 
+            //Создание объекта класса валидатор и установка
+            //значения для сравнения (эпсилон)
             Validator validator = ResponseValidator.getInstance();
 //            validator.setParameter(0.2);
-            validator.setParameter(0.0001);
-
-            List<Double> res;
+//            validator.setParameter(0.0001);
+            validator.setParameter(epsilon);
 
             //Засекаем время до начала решения
             double start = System.currentTimeMillis();
 
             assert strategy != null;
-            res = strategy.getSolution(equation, validator);
 
+            //Получаем список реше
+            List<Double> res = strategy.getSolution(equation, validator);
 
             //Выводим получившиеся ответы
             System.out.println("Ответ: ");
