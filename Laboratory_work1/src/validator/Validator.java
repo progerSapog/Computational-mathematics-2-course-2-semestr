@@ -3,16 +3,22 @@ package validator;
 /**
  * Интерфейс реализующий метод проверки
  * */
-public interface Validator {
+public interface Validator
+{
 
     /**
      * Метод для проверки праивльности значения
      *
-     * @param epsilon       - точность с которой должно быть найдено решение
-     * @param previousValue - текущее значение функции - f(Xn)
-     * @param presentValue  - предыдущее значение функции - f(Xn-1)
-     *
+     * @param prevValue    - предыдущее значение функции - f(Xn-1)
+     * @param presentValue - текущее значение функции - f(Xn)
      * @return true - если найдено подхоядщее решение
      * */
-    boolean isValid(double previousValue, double presentValue, double epsilon);
+    boolean isValid(double presentValue, double prevValue);
+
+    /**
+     * Метод задания параметра для сравнения.
+     *
+     * @param parameter - значение с которым будет происходить сравнивание
+     * */
+    void setParameter(double parameter);
 }

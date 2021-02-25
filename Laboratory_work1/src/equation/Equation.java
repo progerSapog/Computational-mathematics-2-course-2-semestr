@@ -17,7 +17,8 @@ import java.util.List;
  * @author Vladislav Sapozhnikov 19-IVT-3
  * @see NoLinearThirdDegreeEquation
  * */
-public interface Equation {
+public interface Equation
+{
 
     /**
      * Метод для задания коэфициентов
@@ -43,18 +44,18 @@ public interface Equation {
     double getFstDerivativeAtX(double x);
 
     /**
+     * Метод для получение значения второй производной в при заданном x.
+     *
+     * @param x - точка, в которой необходимо получить значение второй производной.
+     * @return значение второй производной в данной точке
+     * */
+    double getSecDerivativeAtX(double x);
+
+    /**
      * Метод для получения списка интервалов монотонности.
      *
      * @return список из чисел, которые составляют отрезки монотонности
      *         типа [i; i+1]
      * */
     List<List<Double>> getIntervalsOfMonotony();
-
-    /**
-     * Метод для получение значения первой производной в при заданном x.
-     *
-     * @param x - точка, в которой необходимо получить значение второй производной.
-     * @return значение второй производной в данной точке
-     * */
-    double getSecDerivativeAtX(double x);
 }

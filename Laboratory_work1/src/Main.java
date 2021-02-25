@@ -1,7 +1,8 @@
 import equation.NoLinearThirdDegreeEquation;
 import equation_solution_strategy.*;
+import validator.ResponseValidator;
+import validator.Validator;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,19 +35,6 @@ public class Main
         //Запись введенных коэффициентов у равнение
         equation.setCoefficients(coefficients);
 
-        //////////////////////УДОЛИ/////////////////////////////
-        System.out.printf("%.4f \n", equation.getValueAtX(5));
-        System.out.printf("%.4f \n", equation.getFstDerivativeAtX(5));
-        System.out.printf("%.4f \n", equation.getSecDerivativeAtX(5));
-
-        System.out.println();
-        System.out.println();
-        System.out.println();
-
-        System.out.println("Интервалы: ");
-        List<List<Double>> intervals = equation.getIntervalsOfMonotony();
-        System.out.println(intervals);
-        //////////////////////////УДОЛИ//////////////////////////////////
         SolutionStrategy strategy = null;
 
         String ch;
@@ -80,17 +68,32 @@ public class Main
                 default    -> System.out.println("Неверный ввод!");
             }
 
-            //Создание пустого списка под ответы
-            List<Double> answers = new LinkedList<>();
+            Validator validator = ResponseValidator.getInstance();
+            validator.setParameter(0.2);
+//            validator.setParameter(0.0001);
+
+            List<Double> res;
 
             //Засекаем время до начала решения
             double start = System.currentTimeMillis();
-            for (List<Double> interval : intervals)
-            {
-                answers.add(strategy.getSolution(interval.get(0), interval.get(1)));
-            }
+
+            assert strategy != null;
+            res = strategy.getSolution(equation, validator);
+
+
             //Выводим получившиеся ответы
-            System.out.println("Ответ: " + answers);
+            System.out.println("Ответ: ");
+            for (Double aDouble : res) {
+                System.out.printf("%.5f", aDouble);
+                System.out.print("; ");
+            }
+            System.out.println();
+
+            for (Double re : res)
+            {
+                System.out.printf("%.5f", equation.getValueAtX(re));
+                System.out.print("; ");
+            }
 
             //Засекаем время после конца решения
             double end   = System.currentTimeMillis();

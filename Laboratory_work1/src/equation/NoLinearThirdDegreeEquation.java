@@ -5,8 +5,12 @@ import java.util.*;
 /**
  * Класс Нелинейных уравнений третьей степени.
  * Реализует интерфейс Equation
+ *
+ * @author Vladislav Sapozhnikov 19-IVT-3
+ * @see Equation
  * */
-public class NoLinearThirdDegreeEquation implements Equation {
+public class NoLinearThirdDegreeEquation implements Equation
+{
 
     private double a;   //коэффициент при x^3
     private double b;   //коэффициент при x^2
@@ -19,7 +23,8 @@ public class NoLinearThirdDegreeEquation implements Equation {
      *
      * @param a - значения коэфициента, которое необходимо установить.
      * */
-    private void setA(double a) {
+    private void setA(double a)
+    {
         this.a = a;
     }
 
@@ -29,7 +34,8 @@ public class NoLinearThirdDegreeEquation implements Equation {
      *
      * @param b - значения коэфициента, которое необходимо установить.
      * */
-    private void setB(double b) {
+    private void setB(double b)
+    {
         this.b = b;
     }
 
@@ -39,7 +45,8 @@ public class NoLinearThirdDegreeEquation implements Equation {
      *
      * @param c - значения коэфициента, которое необходимо установить.
      * */
-    private void setC(double c) {
+    private void setC(double c)
+    {
         this.c = c;
     }
 
@@ -49,35 +56,40 @@ public class NoLinearThirdDegreeEquation implements Equation {
      *
      * @param d - значения коэфициента, которое необходимо установить.
      * */
-    private void setD(double d) {
+    private void setD(double d)
+    {
         this.d = d;
     }
 
     /**
      * Метод для получения коэффициента при x^3.
      * */
-    public double getA() {
+    private double getA()
+    {
         return a;
     }
 
     /**
      * Метод для получения коэффициента при x^2.
      * */
-    public double getB() {
+    private double getB()
+    {
         return b;
     }
 
     /**
      * Метод для получения коэффициента при x^1.
      * */
-    public double getC() {
+    private double getC()
+    {
         return c;
     }
 
     /**
      * Метод для получения коэффициента при x^0.
      * */
-    public double getD() {
+    private double getD()
+    {
         return d;
     }
 
@@ -87,7 +99,8 @@ public class NoLinearThirdDegreeEquation implements Equation {
      * @param coefficients - массив коэффициентов, который необходимо установить
      * */
     @Override
-    public void setCoefficients(double[] coefficients) {
+    public void setCoefficients(double[] coefficients)
+    {
         setA(coefficients[0]);
         setB(coefficients[1]);
         setC(coefficients[2]);
@@ -101,7 +114,8 @@ public class NoLinearThirdDegreeEquation implements Equation {
      * @return значение функции в заданной точке
      * */
     @Override
-    public double getValueAtX(double x) {
+    public double getValueAtX(double x)
+    {
         return getA()*Math.pow(x, 3) + getB()*Math.pow(x, 2) + getC()*x + getD();
     }
 
@@ -112,7 +126,8 @@ public class NoLinearThirdDegreeEquation implements Equation {
      * @return значение первой производной в заданной точке
      * */
     @Override
-    public double getFstDerivativeAtX(double x) {
+    public double getFstDerivativeAtX(double x)
+    {
         return 3*getA()*Math.pow(x,2) + 2.0*getB()*x + getC();
     }
 
@@ -123,7 +138,8 @@ public class NoLinearThirdDegreeEquation implements Equation {
      * @return значение второй производной в заданной точке
      * */
     @Override
-    public double getSecDerivativeAtX(double x) {
+    public double getSecDerivativeAtX(double x)
+    {
         return 6.0*getA()*x + 2.0*getB();
     }
 
@@ -138,7 +154,8 @@ public class NoLinearThirdDegreeEquation implements Equation {
      *         типа [i; i+1]
      * */
     @Override
-    public List<List<Double>> getIntervalsOfMonotony() {
+    public List<List<Double>> getIntervalsOfMonotony()
+    {
         List<Double> xList = new LinkedList<>();
         List<Double> yList = new LinkedList<>();
 
@@ -150,7 +167,8 @@ public class NoLinearThirdDegreeEquation implements Equation {
 
         //Получаем значения функии в каждой точке интервала
         //от -100 до 100
-        for (Double aDouble : xList) {
+        for (Double aDouble : xList)
+        {
             yList.add(getValueAtX(aDouble));
         }
 
@@ -182,7 +200,6 @@ public class NoLinearThirdDegreeEquation implements Equation {
             }
             if (!tempList.isEmpty()) cordList.add(tempList);
         }
-
         return cordList;
     }
 
@@ -220,6 +237,7 @@ public class NoLinearThirdDegreeEquation implements Equation {
     /**
      * Конуструктор без параметров
      * */
-    public NoLinearThirdDegreeEquation() {
+    public NoLinearThirdDegreeEquation()
+    {
     }
 }

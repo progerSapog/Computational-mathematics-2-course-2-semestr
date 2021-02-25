@@ -7,10 +7,12 @@ package validator;
  * WARNING!!!
  *    Критерий остановки: найдено точное значение f(Xn) = 0 не используется
  * */
-public class ResponseValidator implements Validator {
+public class ResponseValidator implements Validator
+{
 
     private static ResponseValidator instance;   //поля для хранения ссылки на единственный
                                                  //экземпляр класса
+    private double epsilon;
 
     /**
      * Проверка решение на соответсвие критериям остановки:
@@ -18,25 +20,28 @@ public class ResponseValidator implements Validator {
      *  - Значение двух последних приближений отличается меньше, чем на epsilon
      *    |X(n-1) - X(n)| < epsilon
      *
-     * @param epsilon       - точность с которой должно быть найдено решение
-     * @param previousValue - текущее значение функции - f(Xn)
-     * @param presentValue  - предыдущее значение функции - f(Xn-1)
-     *
+     * @param prevValue    - предыдущее значение функции - f(Xn-1)
+     * @param presentValue - текущее значение функции - f(Xn)
      * @return true - если найдено подхоядщее решение
      * */
     @Override
-    public boolean isValid(double previousValue, double presentValue, double epsilon) {
-        if (presentValue < epsilon) return true;
-        else return (previousValue - presentValue) < epsilon;
+    public boolean isValid(double prevValue, double presentValue)
+    {
+        if (Math.abs(prevValue - presentValue) < epsilon) return true;
+        return Math.abs(presentValue) < epsilon;
     }
 
     /**
      * Метод для получения едиснтвенного экземпляара класса.
      * Нам достаточно лишь одного экземпляара класса ResponseValidator
      * для вызова методов проверки
+     *
+     * @return ссылку на один единственный экземпляр класса
      * */
-    public static ResponseValidator getInstance() {
-        if (instance == null) {
+    public static ResponseValidator getInstance()
+    {
+        if (instance == null)
+        {
             instance = new ResponseValidator();
         }
 
@@ -44,8 +49,20 @@ public class ResponseValidator implements Validator {
     }
 
     /**
+     * Метод для установки параметра сравнений.
+     *
+     * @param epsilon - значения для сравнений
+     * */
+    @Override
+    public void setParameter(double epsilon)
+    {
+        this.epsilon = epsilon;
+    }
+
+    /**
      * Приватный конструктор запрящает создание объекта из вне.
      * */
-    private ResponseValidator() {
+    private ResponseValidator()
+    {
     }
 }
