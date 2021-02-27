@@ -6,10 +6,41 @@ import validator.Validator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Класс, содержащий точку входа в программу - метод  main.
+ * Язык: java
+ *
+ * Реализация первой лабораторной работы по диспилине: Вычислительная математика
+ *
+ * Текст задания:
+ *  Решить нелинейное уравнение с одним неизвестным с использованием четырех методов
+ *  (метод биссекции, метод хорд, метод Ньютона, метод простой итерации). Задание по вариантам.
+ *  Номер варианта – номер студента в списке группы. ε=0.001
+ *
+ * @release: 27.02.21
+ * @last_update: 27.02.21
+ *
+ * @author Vladislav Sapozhnikov 19-IVT-3
+ */
 public class Main
 {
+    //Константы для хранения последовательностей для
+    //изменения цвета текста в консоли
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+
+    /**
+     * Точка входа в программу
+     * */
     public static void main(String[] args)
     {
+        System.out.println("\t\t\t\tЛабораторная работа №1 <<" + PURPLE + "Решение нелинейного уравнения" +
+                RESET + ">>");
+
+        //Создаем переменную для хранения ур-ия
+        //Открываем поток ввода
         NoLinearThirdDegreeEquation equation = new NoLinearThirdDegreeEquation();
         Scanner scanner = new Scanner(System.in);
 
@@ -67,7 +98,6 @@ public class Main
             System.out.println("\t4. Метод простых итераций");
             System.out.println();
             System.out.println("\tВведите q для выхода");
-            System.out.println();
             System.out.print("Ввод: ");
             ch = scanner.nextLine();
             System.out.println();
@@ -79,17 +109,17 @@ public class Main
                 case ("3") -> strategy = new NewtonSolution();
                 case ("4") -> strategy = new SimpleIterationSolution();
                 case ("q") -> {
-                                   System.out.println("Завершение программы...");
+                                   System.out.println(RED + "Завершение работы..." + RESET);
                                    System.exit(0);
                               }
-                default    -> System.out.println("Неверный ввод!");
+                default    -> System.out.println(RED + "Неверный ввод!" + RESET);
             }
 
             //Создание объекта класса валидатор и установка
             //значения для сравнения (эпсилон)
             Validator validator = ResponseValidator.getInstance();
 //            validator.setParameter(0.2);
-//            validator.setParameter(0.0001);
+//            validator.setParameter(0.001);
             validator.setParameter(epsilon);
 
             //Засекаем время до начала решения
@@ -97,25 +127,28 @@ public class Main
 
             assert strategy != null;
 
+            //Засекаем время после конца решения
+            double end   = System.currentTimeMillis();
             //Получаем список реше
-            List<Double> res = strategy.getSolution(equation, validator);
+            List<Double> resultLst = strategy.getSolution(equation, validator);
 
-            //Выводим получившиеся ответы
-            System.out.println("Ответ: ");
-            for (Double aDouble : res) {
-                System.out.printf("%.5f", aDouble);
+            System.out.print(CYAN + "Значения функции при найденных ответах:\n "
+                    + RESET);
+            for (int i = 0; i < resultLst.size(); i++)
+            {
+                System.out.printf("y" + (i + 1) + ": %.5f", equation.getValueAtX(resultLst.get(i)));
                 System.out.print("; ");
             }
             System.out.println();
 
-            for (Double re : res)
+            //Выводим получившиеся ответы
+            System.out.print(RED + "Ответ: " + RESET);
+            for (int i = 0; i < resultLst.size(); i++)
             {
-                System.out.printf("%.5f", equation.getValueAtX(re));
+                System.out.printf("x" + (i + 1) + ": %.5f", resultLst.get(i));
                 System.out.print("; ");
             }
-
-            //Засекаем время после конца решения
-            double end   = System.currentTimeMillis();
+            System.out.println();
 
             //Выводим затраченное время для данного решения
             System.out.println("Затраченное время: " + (end - start)/1000.0 + " секунд\n");

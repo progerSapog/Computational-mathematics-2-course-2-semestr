@@ -48,7 +48,7 @@ public class BisectionSolution implements SolutionStrategy
             //Пока не сработает условие валидатора
             //В предыдущее значение записываем текущее значение Xi
             //Получаем новое значение Xi = (a+b)/2
-            while (!validator.isValid(prevValue, equation.getValueAtX((xI))))
+            while (!validator.isValid(equation.getValueAtX(prevValue), equation.getValueAtX((xI))))
             {
                 prevValue = xI;
                 xI = ((interval.get(0)) + interval.get(1)) / 2.0;

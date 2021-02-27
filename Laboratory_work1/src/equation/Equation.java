@@ -19,7 +19,6 @@ import java.util.List;
  * */
 public interface Equation
 {
-
     /**
      * Метод для задания коэфициентов
      *

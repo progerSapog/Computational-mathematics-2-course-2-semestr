@@ -6,13 +6,18 @@ package validator;
  *
  * WARNING!!!
  *    Критерий остановки: найдено точное значение f(Xn) = 0 не используется
+ *
+ * @author Vladislav Sapozhnikov 19-IVT-3
+ * @see Validator
  * */
 public class ResponseValidator implements Validator
 {
 
     private static ResponseValidator instance;   //поля для хранения ссылки на единственный
                                                  //экземпляр класса
-    private double epsilon;
+
+    private double epsilon;                      //поля для хранения значения с которым
+                                                 //будет проводится сравнение
 
     /**
      * Проверка решение на соответсвие критериям остановки:

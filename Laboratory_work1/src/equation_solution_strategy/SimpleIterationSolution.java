@@ -14,6 +14,9 @@ import java.util.List;
  *    Подобранная функция: x - 0.1 * (x^3+0.1x^2+0.4x+1.2)
  *    подходит только для ур-ия Варианта 15
  * WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING!
+ *
+ * @author Vladislav Sapozhnikov 19-IVT-3
+ * @see SolutionStrategy
  * */
 public class SimpleIterationSolution implements SolutionStrategy
 {
@@ -50,13 +53,13 @@ public class SimpleIterationSolution implements SolutionStrategy
             //соотвествует данному промежутку
             prevValue = (interval.get(0) + interval.get(1)) / Math.random();
 
-            while (true)
+            for (;;)
             {
                 //Данная сжимающая функция подобрана только для варианта 15
                 xI = prevValue - 0.1*(Math.pow(prevValue, 3) + 0.1*Math.pow(prevValue, 2) + 0.4*prevValue -1.2);
 
                 //Проверка критерием остановки
-                if (Math.abs(xI - prevValue) < 0.0001) break;
+                if (validator.isValid(equation.getValueAtX(prevValue), equation.getValueAtX((xI)))) break;
                 prevValue = xI;
             }
             resList.add(xI);

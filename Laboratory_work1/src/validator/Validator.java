@@ -2,10 +2,12 @@ package validator;
 
 /**
  * Интерфейс реализующий метод проверки
+ *
+ * @author Vladislav Sapozhnikov 19-IVT-3
+ * @see ResponseValidator
  * */
 public interface Validator
 {
-
     /**
      * Метод для проверки праивльности значения
      *

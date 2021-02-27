@@ -49,7 +49,7 @@ public class NewtonSolution implements SolutionStrategy
             //Пока не сработает условие валидатора
             //В предыдущее значение записываем текущее значение Xi
             //Получаем новое значение Xi+1 = f(xi)/f'(xi)
-            while (!validator.isValid(prevValue, equation.getValueAtX((xI))))
+            while (!validator.isValid(equation.getValueAtX(prevValue), equation.getValueAtX((xI))))
             {
                 prevValue = xI;
                 xI -= (equation.getValueAtX(prevValue)/equation.getFstDerivativeAtX(prevValue));
