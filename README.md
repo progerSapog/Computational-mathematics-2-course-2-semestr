@@ -7,8 +7,4 @@
 Язык программирования: **Java** 
 
 + [Лабораторная работа №1.](https://github.com/progerSapog/Computational-mathematics-2-course-2-semestr/tree/main/Laboratory_work1) Решение нелинейного уравнения
-  + :white_check_mark: Метод биссекци
-  + :white_check_mark: Метод хорд   
-  + :white_check_mark: Метод касательных 
-  + :white_check_mark: Метод простой итерации 
-  + :white_check_mark: Отчет
+
