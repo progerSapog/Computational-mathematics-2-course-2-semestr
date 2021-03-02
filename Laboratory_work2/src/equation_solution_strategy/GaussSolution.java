@@ -3,19 +3,20 @@ package equation_solution_strategy;
 import equation.SystemOfEquations;
 import validator.Validator;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Класс реализующий решение методом Простой итерации (метод Якоби).
+ * Класс реализующий решение методом Гаусса.
  * Реализует интерфейс SolutionStrategy
  *
  * @author Vladislav Sapozhnikov 19-IVT-3
  * @see SolutionStrategy
  * */
-public class SimpleIterationSolution implements SolutionStrategy
+public class GaussSolution implements SolutionStrategy
 {
     /**
-     * Метод для получения решений методом Простой итерации (метод Якоби).
+     * Метод для получения решений методом Гаусса.
      *
      * @param system    - система, которую необходимо решить
      * @param validator - валидатор, с заданным параметром проверки
@@ -30,7 +31,7 @@ public class SimpleIterationSolution implements SolutionStrategy
     /**
      * Конструктор без параметров.
      * */
-    public SimpleIterationSolution()
+    public GaussSolution()
     {
     }
 }

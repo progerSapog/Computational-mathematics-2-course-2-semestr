@@ -1,6 +1,6 @@
 package equation_solution_strategy;
 
-import equation.Equation;
+import equation.SystemOfEquations;
 import validator.Validator;
 
 import java.util.List;
@@ -9,9 +9,8 @@ import java.util.List;
  * Общий интерфейс всех стратегий решения.
  *
  * @author Vladislav Sapozhnikov 19-IVT-3
- * @see BisectionSolution
- * @see ChordSolution
- * @see NewtonSolution
+ * @see GaussSolution
+ * @see GaussSeidelSolution
  * @see SimpleIterationSolution
  * */
 public interface SolutionStrategy
@@ -19,10 +18,9 @@ public interface SolutionStrategy
     /**
      * Метод для вызова той или иной стратегии решения.
      *
-     * @param equation  - ур-ие, которое необходимо решить
-     * @param validator - валидатор с заданным условием проверки
-     * @return список значений, которые являются решениями данного
-     *         ур-ия
+     * @param system    - система, которую необходимо решить
+     * @param validator - валидатор, с заданным параметром проверки
+     * @return список значений, являющимися решениями данной системы уравнений.
      * */
-    List<Double> getSolution(Equation equation, Validator validator);
+    List<Double> getSolution(SystemOfEquations system, Validator validator);
 }

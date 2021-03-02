@@ -7,4 +7,9 @@
 Язык программирования: **Java** 
 
 + [Лабораторная работа №1.](https://github.com/progerSapog/Computational-mathematics-2-course-2-semestr/tree/main/Laboratory_work1) Решение нелинейного уравнения
++ [Лабораторная работы №2.](https://github.com/progerSapog/Computational-mathematics-2-course-2-semestr/tree/main/Laboratory_work2/src) Решение системы линейных уравнений итерационным методом и методом Гаусса-Зейделя  
+        + :black_square_button: Метод Гаусса
+        + :black_square_button: Метод Простой итерации (метод Якобии)
+        + :black_square_button: Метод Гаусса-Зейделя
+        + :black_square_button: Отчёт
 
