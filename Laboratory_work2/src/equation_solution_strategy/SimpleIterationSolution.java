@@ -35,7 +35,6 @@ public class SimpleIterationSolution implements SolutionStrategy
         int count = 0;                                                 //счетчик итераций
 
         //В цикле вычисляем значения вектора приближений
-        //  Xi = (Bi - Σ (при i != j) Aij * Xj)
         for (;;)
         {
             currentApproximation[0] = (vectorB[0] - (coefficients[0][1]*prevApproximation[1] +    //значение X1

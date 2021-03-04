@@ -92,10 +92,7 @@ public class Main
         SolutionStrategy strategy = null;
 
         //Переменная для хранения результата ввода
-        String ch;
-
-        //Сброс потока ввода
-        ch = scanner.nextLine();
+        String ch = "";
 
         //Выбор стратегии решения
         while (!ch.equals("q"))
