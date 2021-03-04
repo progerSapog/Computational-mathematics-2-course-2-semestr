@@ -1,5 +1,7 @@
 package validator;
 
+import java.util.List;
+
 /**
  * Интерфейс реализующий метод проверки
  *
@@ -11,11 +13,11 @@ public interface Validator
     /**
      * Метод для проверки праивльности значения
      *
-     * @param prevValue    - предыдущее значение функции - f(Xn-1)
-     * @param presentValue - текущее значение функции - f(Xn)
+     * @param prevValues    - вектор значений, полученных про прошлой итерации
+     * @param presentValues - вектор значений, полученный при текущей итерации
      * @return true - если найдено подхоядщее решение
      * */
-    boolean isValid(double presentValue, double prevValue);
+    boolean isValid(double[] presentValues, double[] prevValues);
 
     /**
      * Метод задания параметра для сравнения.

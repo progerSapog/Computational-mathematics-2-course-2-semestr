@@ -3,8 +3,6 @@ package equation_solution_strategy;
 import equation.SystemOfEquations;
 import validator.Validator;
 
-import java.util.List;
-
 /**
  * Общий интерфейс всех стратегий решения.
  *
@@ -22,5 +20,5 @@ public interface SolutionStrategy
      * @param validator - валидатор, с заданным параметром проверки
      * @return список значений, являющимися решениями данной системы уравнений.
      * */
-    List<Double> getSolution(SystemOfEquations system, Validator validator);
+    double[] getSolution(SystemOfEquations system, Validator validator);
 }

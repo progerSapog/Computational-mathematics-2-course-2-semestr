@@ -3,9 +3,6 @@ package equation_solution_strategy;
 import equation.SystemOfEquations;
 import validator.Validator;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * Класс реализующий решение методом Гаусса.
  * Реализует интерфейс SolutionStrategy
@@ -23,7 +20,7 @@ public class GaussSolution implements SolutionStrategy
      * @return список значений, являющимися решениями данной системы уравнений.
      * */
     @Override
-    public List<Double> getSolution(SystemOfEquations system, Validator validator)
+    public double[] getSolution(SystemOfEquations system, Validator validator)
     {
         return null;
     }

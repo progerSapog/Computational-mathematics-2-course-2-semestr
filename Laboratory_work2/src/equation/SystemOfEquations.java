@@ -25,9 +25,23 @@ public interface SystemOfEquations
     void setCoefficients(double[][] coefficients);
 
     /**
+     * Метод для получения коэфициентов при x
+     *
+     * @return массив коэфициентов при членах уравнения.
+     * */
+    double[][] getCoefficients();
+
+    /**
      * Метод для задания вектора b
      *
      * @param vectorB - массив значений вектора b.
      * */
     void setVectorB(double[] vectorB);
+
+    /**
+     * Метод для получения вектора b
+     *
+     * @return массив значений вектора b.
+     * */
+    double[] getVectorB();
 }

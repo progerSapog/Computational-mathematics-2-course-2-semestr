@@ -24,6 +24,10 @@ import java.util.Scanner;
  *  0.38x1 + 0.25x2 - 54x3   = 0.63
  *  0.28x1 + 0.46x2 - 1.12x2 = 0.88
  *
+ * WARNING!!!
+ *   Прогрмма не имеет системы ввода коэфициентов системы ур-ий, т.к.
+ *   предназначенна для решения только 15 Варианта ЛР №2
+ *
  * @release: -
  * @last_update: -
  *
@@ -36,6 +40,7 @@ public class Main
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
     public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
 
     /**
      * Точка входа в программу
@@ -51,10 +56,6 @@ public class Main
         SystemOfThreeEquations system = new SystemOfThreeEquations();
         Scanner scanner = new Scanner(System.in);
 
-/////////////////// ТЕСТ - УДОЛИ /////////////////////////
-
-/////////////////// ТЕСТ - УДОЛИ /////////////////////////
-
         System.out.println("Программа для решения системы 3ёх нелинейных уравнений.");
         System.out.println("\tОбщий вид системы таких уравнений: ");
         System.out.println("\t\ta11 * x1 + a12 * x2 + a13 * x3 = b1");
@@ -67,40 +68,24 @@ public class Main
         double epsilon = 0.001;
 //        System.out.println();
 
-        //Ввод коэффициентов уравнения
+        //Изначально ур-ие имеет вид:
+        //  1.6 * x1  + 0.12 * x2 + 0.57 * x3 = 0.18
+        //  0.38 * x1 + 0.25 * x2 - 54.0 * x3 = 0.63
+        //  0.28 * x1 + 0.46 * x2 - 1.12 * x3 = 0.88
+        //
+        //Однако при записи в систему строки 2 и 3 переставлены
+        //В противном случае из-за сильно выделяющегося коэфициента -54.0
+        //система не сходится
         double[][] coefficients = {{1.6,  0.12,  0.57},
-                                   {0.38, 0.25, -54.0},
-                                   {0.28, 0.46, -1.12}};
-        double[]  vectorB        = {0.18, 0.63, 0.88};
-
-//        double[][] coefficients = new double[3][3];
-//        double[]   vectorB      = new double[3];
-//        for (int i = 0; i < coefficients.length; i++)
-//        {
-//            for (int j = 0; j < coefficients[0].length; j++)
-//            {
-//                System.out.print("Введите коээфициент a" + (i + 1) + (j + 1) + ": ");
-//                coefficients[i][j] = scanner.nextDouble();
-//            }
-//            System.out.println();
-//        }
-//
-//        for (int i = 0; i < vectorB.length; i++)
-//        {
-//            System.out.print("Введите значение b" + (i + 1)  + ": ");
-//            vectorB[i] = scanner.nextDouble();
-//        }
+                                   {0.28, 0.46, -1.12},
+                                   {0.38, 0.25, -54.0}};
+        double[]  vectorB        = {0.18, 0.88, 0.63};
 
         //Запись введенных коэффициентов в систему
         system.setCoefficients(coefficients);
 
         //запись вектора B в систему
         system.setVectorB(vectorB);
-
-        //////////// ТЕСТ - УДОЛИ /////////////////////////////////
-        System.out.println(Arrays.deepToString(system.coefficients));
-        System.out.println(Arrays.toString(system.vectorB));
-        //////////// ТЕСТ - УДОЛИ /////////////////////////////////
 
         //Создание ссылки на объект, реализующий интерфейс
         //SolutionStrategy
@@ -128,8 +113,8 @@ public class Main
             switch (ch)
             {
                 case ("1") -> strategy = new GaussSolution();
-                case ("2") -> strategy = new GaussSeidelSolution();
-                case ("3") -> strategy = new SimpleIterationSolution();
+                case ("2") -> strategy = new SimpleIterationSolution();
+                case ("3") -> strategy = new GaussSeidelSolution();
                 case ("q") -> {
                                    System.out.println(RED + "Завершение работы..." + RESET);
                                    System.exit(0);
@@ -152,19 +137,20 @@ public class Main
             //Засекаем время после конца решения
             double end   = System.currentTimeMillis();
             //Получаем список реше
-            List<Double> resultLst = strategy.getSolution(system, validator);
+            double[] resArr = strategy.getSolution(system, validator);
 
             //Выводим получившиеся ответы
             System.out.print(RED + "Ответ: " + RESET);
-            for (int i = 0; i < resultLst.size(); i++)
+            for (int i = 0; i < resArr.length - 1; i++)
             {
-                System.out.printf("x" + (i + 1) + ": %.5f", resultLst.get(i));
+                System.out.printf("x" + (i + 1) + ": %.5f", resArr[i]);
                 System.out.print("; ");
             }
             System.out.println();
 
             //Выводим затраченное время для данного решения
-            System.out.println("Затраченное время: " + (end - start)/1000.0 + " секунд\n");
+            System.out.println("Затраченное время: " + CYAN + (end - start)/1000.0 + RESET + " секунд");
+            System.out.println("Кол-во итераций:   " + CYAN + (int)resArr[3] + RESET + " итераций\n");
         }
     }
 }

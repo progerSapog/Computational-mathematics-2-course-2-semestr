@@ -1,5 +1,10 @@
 package validator;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Singleton класс реализующий интерфейс проверки Validator.
  * Проверяет решение на соответсвие критериям остановки.
@@ -21,19 +26,24 @@ public class ResponseValidator implements Validator
 
     /**
      * Проверка решение на соответсвие критериям остановки:
-     *  - Достигунта заданная точность |f(Xn)| < epsilon
-     *  - Значение двух последних приближений отличается меньше, чем на epsilon
-     *    |X(n-1) - X(n)| < epsilon
+     *  - Максимум из поэлементных разностей двух векторов решений < ε
+     *    max(|Xi^(k) - Xi^(k - 1) |) < ε
      *
-     * @param prevValue    - предыдущее значение функции - f(Xn-1)
-     * @param presentValue - текущее значение функции - f(Xn)
+     * @param prevValues    - предыдущее значение функции - f(Xn-1)
+     * @param presentValues - текущее значение функции - f(Xn)
      * @return true - если найдено подхоядщее решение
      * */
     @Override
-    public boolean isValid(double prevValue, double presentValue)
+    public boolean isValid(double[] presentValues, double[] prevValues)
     {
-        if (Math.abs(prevValue - presentValue) < epsilon) return true;
-        return Math.abs(presentValue) < epsilon;
+        Double[] tempArr = new Double[presentValues.length - 1];
+
+        for (int i = 0; i < presentValues.length - 1; i++)
+        {
+            tempArr[i] = Math.abs((presentValues[i] - prevValues[i]));
+        }
+
+        return Collections.max(Arrays.asList(tempArr)) < epsilon;
     }
 
     /**
