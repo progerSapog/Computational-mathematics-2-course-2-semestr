@@ -3,6 +3,8 @@ package equation_solution_strategy;
 import equation.SystemOfEquations;
 import validator.Validator;
 
+import java.util.Arrays;
+
 /**
  * Класс реализующий решение методом Гаусса.
  * Реализует интерфейс SolutionStrategy
@@ -14,6 +16,8 @@ public class GaussSolution implements SolutionStrategy
 {
     /**
      * Метод для получения решений методом Гаусса.
+     *   Все шаги данного метода прописанны только Варианта №15
+     *   ЛР №2
      *
      * @param system    - система, которую необходимо решить
      * @param validator - валидатор, с заданным параметром проверки
@@ -25,14 +29,71 @@ public class GaussSolution implements SolutionStrategy
         double[][] coefficients         = system.getCoefficients();    //получение коэфициентов Ann
         double[]   vectorB              = system.getVectorB();         //получение вектора b
 
-        double[]   prevApproximation    = {0.0, 0.0, 0.0};             //инициализуем значения вектора
-        //прошлый приближений нулями
-
         double[]   currentApproximation = new double[4];               //массив для хранения вектора текущих
-        //приближений. В последний элемент записывается
-        //кол-во итераций
+        currentApproximation[3] = 0;
 
-        return null;
+        //1-ую строку делим на 1.6
+        for (int i = 0; i < coefficients.length; i++)
+        {
+            coefficients[0][i] /= 1.6;
+        }
+        vectorB[0] /= 1.6;
+
+        //от 2 строки отнимаем 1 строку, умноженную на 0.28;
+        //от 3 строки отнимаем 1 строку, умноженную на 0.38
+        for (int i = 0; i < coefficients.length; i++)
+        {
+            coefficients[1][i] = coefficients[1][i] - 0.28 * coefficients[0][i];
+            coefficients[2][i] = coefficients[2][i] - 0.38 * coefficients[0][i];
+        }
+        vectorB[1] = vectorB[1] - vectorB[0] * 0.28;
+        vectorB[2] = vectorB[2] - vectorB[0] * 0.38;
+
+        //2-ую строку делим на 0.439
+        for (int i = 0; i < coefficients.length; i++)
+        {
+            coefficients[1][i] /= 0.439;
+        }
+        vectorB[1] /= 0.439;
+
+        //от 1 строки отнимаем 2 строку, умноженную на 0.075;
+        //от 3 строки отнимаем 2 строку, умноженную на 0.2215
+        for (int i = 0; i < coefficients.length; i++)
+        {
+            coefficients[0][i] = coefficients[0][i] - 0.075  * coefficients[1][i];
+            coefficients[2][i] = coefficients[2][i] - 0.2215 * coefficients[1][i];
+        }
+        vectorB[0] = vectorB[0] - 0.075  * vectorB[1];
+        vectorB[2] = vectorB[2] - 0.2215 * vectorB[1];
+
+        //3-ую строку делим на -53.5199430523918
+        for (int i = 0; i < coefficients.length; i++)
+        {
+            coefficients[2][i] /= -53.5199430523918;
+        }
+        vectorB[2] /= -53.5199430523918;
+
+        //от 1 строки отнимаем 3 строку, умноженную на 0.564636;
+        //к 2 строке добавляем 3 строку, умноженную на 2.7784738041
+        for (int i = 0; i < coefficients.length; i++)
+        {
+            coefficients[0][i] = coefficients[0][i] - 0.564636     * coefficients[2][i];
+            coefficients[1][i] = coefficients[1][i] + 2.7784738041 * coefficients[2][i];
+        }
+        vectorB[0] = vectorB[0] - 0.564636 * vectorB[2];
+        vectorB[1] = vectorB[1] + 2.7784738041 * vectorB[2];
+
+        for (double[] coefficient : coefficients)
+        {
+            for (int j = 0; j < coefficients[0].length; j++)
+            {
+                if (coefficient[j] == 1.0) {
+                    currentApproximation[j] = vectorB[j];
+                }
+            }
+        }
+
+        return currentApproximation;
     }
 
     /**
