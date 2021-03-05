@@ -66,6 +66,7 @@ public class Main
         System.out.print("Введите точность ответа (epsilon): ");
         double epsilon = scanner.nextDouble();
         System.out.println();
+        scanner.nextLine();
 
         //Изначально ур-ие имеет вид:
         //  1.6 * x1  + 0.12 * x2 + 0.57 * x3 = 0.18
