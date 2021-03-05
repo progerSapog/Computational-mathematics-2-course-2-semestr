@@ -24,10 +24,18 @@ public class GaussSolution implements SolutionStrategy
     @Override
     public double[] getSolution(SystemOfEquations system, Validator validator)
     {
-        double[][] coefficients         = system.getCoefficients();    //получение коэфициентов Ann
-        double[]   vectorB              = system.getVectorB();         //получение вектора b
+        double[][] coefficients     = new double[3][3];            //перезаписываем значения из массива
+        double[][] tempCoefficients = system.getCoefficients();    //коэффциентов системы в промежуточный массив
+        for (int i = 0; i < coefficients.length; i++)              //в противном случае при работе с массивом
+        {                                                          //меняются коэф-ты в самой системе
+            System.arraycopy(tempCoefficients[i], 0, coefficients[i], 0, coefficients[0].length);
+        }
 
-        double[]   currentApproximation = new double[4];               //массив для хранения вектора текущих
+        double[] vectorB = new double[3];                          //аналогичную перезапись производим
+        //для вектора b
+        System.arraycopy(system.getVectorB(), 0, vectorB, 0, vectorB.length);
+
+        double[]   currentApproximation = new double[4];           //массив для хранения вектора текущих
         currentApproximation[3] = 0;
 
         //1-ую строку делим на 1.6
@@ -81,6 +89,12 @@ public class GaussSolution implements SolutionStrategy
         vectorB[0] = vectorB[0] - 0.564636 * vectorB[2];
         vectorB[1] = vectorB[1] + 2.7784738041 * vectorB[2];
 
+        //После последнего шага система принимает вид:
+        //   1 0 0 | -0.03078
+        //   0 1 0 | 1.92454
+        //   0 0 1 | -0.00297
+        //
+        //Дальше сопоставляем иксы и их значения из вектора b
         for (double[] coefficient : coefficients)
         {
             for (int j = 0; j < coefficients[0].length; j++)

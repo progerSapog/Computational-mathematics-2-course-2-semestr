@@ -56,14 +56,6 @@ public class SystemOfThreeEquations implements SystemOfEquations
         return vectorB;
     }
 
-    @Override
-    public String toString() {
-        return "SystemOfThreeEquations{" +
-                "coefficients=" + Arrays.toString(coefficients) +
-                ", vectorB=" + Arrays.toString(vectorB) +
-                '}';
-    }
-
     /**
      * Конуструктор без параметров
      * */

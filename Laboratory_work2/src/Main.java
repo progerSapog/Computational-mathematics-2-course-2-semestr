@@ -22,7 +22,7 @@ import java.util.Scanner;
  * Ур-ие:
  *  1.6x1  + 0.12x2 + 0.57x3 = 0.18
  *  0.38x1 + 0.25x2 - 54x3   = 0.63
- *  0.28x1 + 0.46x2 - 1.12x2 = 0.88
+ *  0.28x1 + 0.46x2 - 1.12x3 = 0.88
  *
  * WARNING!!!
  *   Прогрмма не имеет системы ввода коэфициентов системы ур-ий, т.к.
@@ -63,10 +63,9 @@ public class Main
         System.out.println("\t\ta31 * x1 + a32 * x2 + a33 * x3 = b3");
         System.out.println();
 
-//        System.out.print("Введите точность ответа (epsilon): ");
-//        double epsilon = scanner.nextDouble();
-        double epsilon = 0.001;
-//        System.out.println();
+        System.out.print("Введите точность ответа (epsilon): ");
+        double epsilon = scanner.nextDouble();
+        System.out.println();
 
         //Изначально ур-ие имеет вид:
         //  1.6 * x1  + 0.12 * x2 + 0.57 * x3 = 0.18
@@ -122,8 +121,6 @@ public class Main
             //Создание объекта класса валидатор и установка
             //значения для сравнения (эпсилон)
             Validator validator = ResponseValidator.getInstance();
-//            validator.setParameter(0.2);
-//            validator.setParameter(0.001);
             validator.setParameter(epsilon);
 
             //Засекаем время до начала решения

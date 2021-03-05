@@ -22,8 +22,16 @@ public class SimpleIterationSolution implements SolutionStrategy
     @Override
     public double[] getSolution(SystemOfEquations system, Validator validator)
     {
-        double[][] coefficients         = system.getCoefficients();    //получение коэфициентов Ann
-        double[]   vectorB              = system.getVectorB();         //получение вектора b
+        double[][] coefficients     = new double[3][3];            //перезаписываем значения из массива
+        double[][] tempCoefficients = system.getCoefficients();    //коэффциентов системы в промежуточный массив
+        for (int i = 0; i < coefficients.length; i++)              //в противном случае при работе с массивом
+        {                                                          //меняются коэф-ты в самой системе
+            System.arraycopy(tempCoefficients[i], 0, coefficients[i], 0, coefficients[0].length);
+        }
+
+        double[] vectorB = new double[3];                          //аналогичную перезапись производим
+        //для вектора b
+        System.arraycopy(system.getVectorB(), 0, vectorB, 0, vectorB.length);
 
         double[]   prevApproximation    = {0.0, 0.0, 0.0};             //инициализуем значения вектора
                                                                        //прошлый приближений нулями
