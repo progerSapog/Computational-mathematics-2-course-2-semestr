@@ -27,7 +27,7 @@ public class ResponseValidator implements Validator
     /**
      * Проверка решение на соответсвие критериям остановки:
      *  - Максимум из поэлементных разностей двух векторов решений < ε
-     *    max(|Xi^(k) - Xi^(k - 1) |) < ε
+     *    max(|Xi^(k) - Xi^(k - 1)|) < ε
      *
      * @param prevValues    - предыдущее значение функции - f(Xn-1)
      * @param presentValues - текущее значение функции - f(Xn)

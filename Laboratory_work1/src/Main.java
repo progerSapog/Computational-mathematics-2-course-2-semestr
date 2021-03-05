@@ -45,7 +45,7 @@ public class Main
         Scanner scanner = new Scanner(System.in);
 
 /////////////////// ТЕСТ - УДОЛИ /////////////////////////
-//        double[] coefficients = {2.0 , (-3.0), (-12.0), (-5.0)};  //с практики
+        double[] coefficients = {2.0 , (-3.0), (-12.0), (-5.0)};  //с практики
 
 //        double[] coefficients = {1.0, (-3.0), 9.0, (-8.0)};       //Вар 1
 //        double[] coefficients = {1.0, (-3.0), 6.0, (-5.0)};       //Вар 2
@@ -64,16 +64,16 @@ public class Main
         System.out.println();
 
         //Ввод коэффициентов уравнения
-        double[] coefficients = new double[4];
-        System.out.print("Введите коэффициент a: ");
-        coefficients[0] = scanner.nextDouble();
-        System.out.print("Введите коэффициент b: ");
-        coefficients[1] = scanner.nextDouble();
-        System.out.print("Введите коэффициент c: ");
-        coefficients[2] = scanner.nextDouble();
-        System.out.print("Введите коэффициент d: ");
-        coefficients[3] = scanner.nextDouble();
-        System.out.println();
+//        double[] coefficients = new double[4];
+//        System.out.print("Введите коэффициент a: ");
+//        coefficients[0] = scanner.nextDouble();
+//        System.out.print("Введите коэффициент b: ");
+//        coefficients[1] = scanner.nextDouble();
+//        System.out.print("Введите коэффициент c: ");
+//        coefficients[2] = scanner.nextDouble();
+//        System.out.print("Введите коэффициент d: ");
+//        coefficients[3] = scanner.nextDouble();
+//        System.out.println();
 
         //Запись введенных коэффициентов у равнение
         equation.setCoefficients(coefficients);

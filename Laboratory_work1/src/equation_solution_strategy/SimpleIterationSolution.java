@@ -51,11 +51,12 @@ public class SimpleIterationSolution implements SolutionStrategy
             //в данном случае [0;1]
             //Math.random() возвращает числа от 0 до 1, что
             //соотвествует данному промежутку
-            prevValue = (interval.get(0) + interval.get(1)) / Math.random();
+            prevValue = (interval.get(0) + interval.get(1)) / 2;
 
             for (;;)
             {
                 //Данная сжимающая функция подобрана только для варианта 15
+                //  g(x) = x - b * f(x), где b = 0.1
                 xI = prevValue - 0.1*(Math.pow(prevValue, 3) + 0.1*Math.pow(prevValue, 2) + 0.4*prevValue -1.2);
 
                 //Проверка критерием остановки

@@ -42,14 +42,9 @@ public class ChordSolution implements SolutionStrategy
         //Проход по каждому интервалу [a;b]
         for (List<Double> interval: intervals)
         {
-            //Отдельно запоминаем изначальные границы интервала,
-            //т.к. в самом списке они будут сужаться в ходе решения
-            //и тогда программа может поменять статичную точку.
-            double A = interval.get(0);
-            double B = interval.get(1);
 
             //Конец a интервала [a;b] неподвижен
-            if (equation.getValueAtX(A) * equation.getSecDerivativeAtX(B) > 0)
+            if (equation.getValueAtX(interval.get(0)) * equation.getSecDerivativeAtX(interval.get(1)) > 0)
             {
                 //Поскольку a не подвижен, то изменять будет b
                 xI = interval.get(1);

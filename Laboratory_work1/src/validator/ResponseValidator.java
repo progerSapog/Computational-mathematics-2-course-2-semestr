@@ -32,7 +32,7 @@ public class ResponseValidator implements Validator
     @Override
     public boolean isValid(double prevValue, double presentValue)
     {
-        if (Math.abs(prevValue - presentValue) < epsilon) return true;
+//        if (Math.abs(prevValue - presentValue) < epsilon) return true;
         return Math.abs(presentValue) < epsilon;
     }
 
