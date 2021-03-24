@@ -1,4 +1,4 @@
-import equation_solution_strategy.*;
+import solution_strategy.*;
 
 import java.util.Scanner;
 

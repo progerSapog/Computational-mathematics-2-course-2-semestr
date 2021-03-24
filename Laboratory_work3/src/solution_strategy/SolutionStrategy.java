@@ -1,4 +1,4 @@
-package equation_solution_strategy;
+package solution_strategy;
 
 /**
  * Общий интерфейс всех стратегий решения.

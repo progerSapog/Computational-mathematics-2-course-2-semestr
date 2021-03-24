@@ -1,4 +1,4 @@
-package equation_solution_strategy;
+package solution_strategy;
 
 import java.util.LinkedList;
 import java.util.List;
