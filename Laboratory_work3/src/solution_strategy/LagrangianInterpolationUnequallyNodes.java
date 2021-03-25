@@ -29,12 +29,12 @@ public class LagrangianInterpolationUnequallyNodes implements SolutionStrategy
         //Список для хранения ответов
         List<Double> resList = new LinkedList<>();
 
-        //Перемнная для хранения промежуточного резлуьтат
-        double res = 0.0;
-
         //Проход по каждому Хi в котором необходимо найти значение функции
         for (double desiredValue : desiredValues)
         {
+            //Перемнная для хранения промежуточного резлуьтат
+            double res = 0.0;
+
             for (int i = 0; i < coordinates.length; i++)
             {
                 //Временная переменная для хранения результатов вычислений

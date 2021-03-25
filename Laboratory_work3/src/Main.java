@@ -74,19 +74,20 @@ public class Main
         Scanner scanner = new Scanner(System.in);
 
         //Координаты точек функции задания 1
-        double[][] coordinatesTask1 = {{0.101, 1.26183},
-                                       {0.106, 1.27644},
-                                       {0.111, 1.29122},
-                                       {0.116, 1.30617},
-                                       {0.121, 1.32130},
-                                       {0.126, 1.33660},
-                                       {0.131, 1.35207},
-                                       {0.136, 1.36773},
-                                       {0.141, 1.38357},
-                                       {0.146, 1.39957},
-                                       {0.151, 1.41579},
-                                       {0.156, 1.43102},
-                                       {0.161, 1.45790}};
+        double[][] coordinatesTask1 =
+                {{0.101, 1.26183},
+                {0.106, 1.27644},
+                {0.111, 1.29122},
+                {0.116, 1.30617},
+                {0.121, 1.32130},
+                {0.126, 1.33660},
+                {0.131, 1.35207},
+                {0.136, 1.36773},
+                {0.141, 1.38357},
+                {0.146, 1.39959},
+                {0.151, 1.41579},
+                {0.156, 1.43102},
+                {0.161, 1.45790}};
 
         //Xi в которых необходимо найти значения функции для задания 1
         double[] desiredValuesTask1 = {0.156, 0.120, 0.170, 0.089, 0.144};
@@ -102,39 +103,39 @@ public class Main
 //
 //        //Xi в которых необходимо найти значения функции для задания 1
 //        double[] desiredValuesTask1 = {0.1, 0.7};
+//
 ////////////////////// ПРИМЕР С ПРАКТИКИ /////////////////////////////////
-
-//        //Координаты точек функции задания 2
-//        double[][] coordinatesTask2 = {{0.35, 2.73951},
-//                                       {0.44, 2.30080},
-//                                       {0.47, 1.96864},
-//                                       {0.51, 1.78776},
-//                                       {0.56, 1.59502},
-//                                       {0.64, 1.34310}};
+//
+//        double[][] coordinatesTask2 =
+//                {{0.15, 2.17},
+//                {0.3, 3.63},
+//                {0.4, 5.07},
+//                {0.55, 7.78}};
+//
 //
 //        //Xi в которых необходимо найти значения функции для задания 2
-//        double[] desiredValuesTask2 = {0.428, 0.555};
+//        double[] desiredValuesTask2 = {0.67};
 
+////////////////////// ПРИМЕР С ПРАКТИКИ /////////////////////////////////
 
         //Координаты точек функции задания 2
-        double[][] coordinatesTask2 = {{0.15, 2.17},
-                {0.3, 3.63},
-                {0.4, 5.07},
-                {0.55, 7.78}};
+        double[][] coordinatesTask2 = {{0.35, 2.73951},
+                                       {0.44, 2.30080},
+                                       {0.47, 1.96864},
+                                       {0.51, 1.78776},
+                                       {0.56, 1.59502},
+                                       {0.64, 1.34310}};
 
         //Xi в которых необходимо найти значения функции для задания 2
-        double[] desiredValuesTask2 = {0.67};
-
-        printConditions(coordinatesTask1, desiredValuesTask1);
-        printConditions(coordinatesTask2, desiredValuesTask2);
-
-
+        double[] desiredValuesTask2 = {0.428, 0.555};
         //Создание ссылки на объект, реализующий интерфейс
         //SolutionStrategy
         SolutionStrategy strategy;
 
         //Переменная для хранения результата ввода
         String ch = "";
+
+        List<Double> resList = null;
 
         //Выбор стратегии решения
         while (!ch.equals("q"))
@@ -148,8 +149,6 @@ public class Main
             System.out.print("Ввод: ");
             ch = scanner.nextLine();
             System.out.println();
-
-            List<Double> resList = null;
 
             //Засекаем время до начала решения
             double start = System.currentTimeMillis();
@@ -165,7 +164,7 @@ public class Main
                             "\nинтерполяционной формулы Ньютона для равноотстоящих узлов\n" + RESET);
 
                     strategy = new NewtonInterpolation();
-                    resList   = strategy.getSolution(coordinatesTask1, desiredValuesTask1);
+                    resList = strategy.getSolution(coordinatesTask1, desiredValuesTask1);
                 }
                 case ("2") ->
                 {
@@ -175,7 +174,7 @@ public class Main
                             "\nинтерполяционного многочлена Лагранжа для равноотстоящих узлов\n" + RESET);
 
                     strategy = new LagrangianInterpolationEquidistantNodes();
-                    resList   = strategy.getSolution(coordinatesTask1, desiredValuesTask1);
+                    resList = strategy.getSolution(coordinatesTask1, desiredValuesTask1);
                 }
                 case ("3") ->
                 {
@@ -185,33 +184,32 @@ public class Main
                             "\nинтерполяционного многочлена Лагранжа для неравноотстоящих узлов\n" + RESET);
 
                     strategy = new LagrangianInterpolationUnequallyNodes();
-                    resList   = strategy.getSolution(coordinatesTask2, desiredValuesTask2);
+                    resList = strategy.getSolution(coordinatesTask2, desiredValuesTask2);
                 }
                 case ("q") ->
                 {
-                                   System.out.println(RED + "Завершение работы..." + RESET);
-                                   System.exit(0);
+                    System.out.println(RED + "Завершение работы..." + RESET);
+                    System.exit(0);
                 }
-                default    -> System.out.println(RED + "Неверный ввод!" + RESET);
+                default -> System.out.println(RED + "Неверный ввод!" + RESET);
             }
 
             //Засекаем время после конца решения
-            double end   = System.currentTimeMillis();
+            double end = System.currentTimeMillis();
 
             assert resList != null;
             //Выводим получившиеся ответы
             System.out.println();
             System.out.print(RED + "Ответ: " + RESET);
-            for (int i = 0; i < resList.size() - 1; i++)
-            {
+            for (int i = 0; i < resList.size() - 1; i++) {
                 System.out.printf("y" + (i + 1) + ": %.5f", resList.get(i));
                 System.out.print("; ");
             }
-            System.out.printf("y" + (resList.size()) + ": %.5f", resList.get(resList.size() -1));
+            System.out.printf("y" + (resList.size()) + ": %.5f", resList.get(resList.size() - 1));
             System.out.println();
 
             //Выводим затраченное время для данного решения
-            System.out.println("Затраченное время: " + CYAN + (end - start)/1000.0 + RESET + " секунд");
+            System.out.println("Затраченное время: " + CYAN + (end - start) / 1000.0 + RESET + " секунд");
             System.out.println();
         }
     }
