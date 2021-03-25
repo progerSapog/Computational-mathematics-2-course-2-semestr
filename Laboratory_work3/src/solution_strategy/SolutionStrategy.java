@@ -1,5 +1,7 @@
 package solution_strategy;
 
+import java.util.List;
+
 /**
  * Общий интерфейс всех стратегий решения.
  *
@@ -16,7 +18,7 @@ public interface SolutionStrategy
      * @param coordinates   - двумерный массив значений [0][Xi] [1][Yi]
      * @param desiredValues - массив значений Xi, в которых необходимо найти значений функций
      *
-     * @return массив значений, являющимися значениями функции в заданных точках.
+     * @return список значений функции в заданных точках.
      * */
-    double[] getSolution(double[][] coordinates, double[] desiredValues);
+    List<Double> getSolution(double[][] coordinates, double[] desiredValues);
 }

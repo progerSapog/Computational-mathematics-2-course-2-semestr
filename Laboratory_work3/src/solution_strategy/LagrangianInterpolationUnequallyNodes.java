@@ -1,5 +1,7 @@
 package solution_strategy;
 
+import java.util.List;
+
 /**
  * Класс реализующий решение методом Простой итерации (метод Якоби).
  * Реализует интерфейс SolutionStrategy
@@ -10,8 +12,8 @@ package solution_strategy;
 public class LagrangianInterpolationUnequallyNodes implements SolutionStrategy
 {
     @Override
-    public double[] getSolution(double[][] coordinates, double[] desiredValues) {
-        return new double[0];
+    public List<Double> getSolution(double[][] coordinates, double[] desiredValues) {
+        return null;
     }
 
     /**
