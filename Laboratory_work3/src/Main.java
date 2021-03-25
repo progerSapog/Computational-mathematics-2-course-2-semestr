@@ -104,17 +104,26 @@ public class Main
 //        double[] desiredValuesTask1 = {0.1, 0.7};
 ////////////////////// ПРИМЕР С ПРАКТИКИ /////////////////////////////////
 
+//        //Координаты точек функции задания 2
+//        double[][] coordinatesTask2 = {{0.35, 2.73951},
+//                                       {0.44, 2.30080},
+//                                       {0.47, 1.96864},
+//                                       {0.51, 1.78776},
+//                                       {0.56, 1.59502},
+//                                       {0.64, 1.34310}};
+//
+//        //Xi в которых необходимо найти значения функции для задания 2
+//        double[] desiredValuesTask2 = {0.428, 0.555};
+
+
         //Координаты точек функции задания 2
-        double[][] coordinatesTask2 = {{0.35, 2.73951},
-                                       {0.44, 2.30080},
-                                       {0.47, 1.96864},
-                                       {0.51, 1.78776},
-                                       {0.56, 1.59502},
-                                       {0.64, 1.34310}};
+        double[][] coordinatesTask2 = {{0.15, 2.17},
+                {0.3, 3.63},
+                {0.4, 5.07},
+                {0.55, 7.78}};
 
         //Xi в которых необходимо найти значения функции для задания 2
-        double[] desiredValuesTask2 = {0.428, 0.555};
-
+        double[] desiredValuesTask2 = {0.67};
 
         printConditions(coordinatesTask1, desiredValuesTask1);
         printConditions(coordinatesTask2, desiredValuesTask2);
@@ -145,7 +154,7 @@ public class Main
             //Засекаем время до начала решения
             double start = System.currentTimeMillis();
 
-            //Ввод с повторением 
+            //Ввод с повторением
             switch (ch)
             {
                 case ("1") ->

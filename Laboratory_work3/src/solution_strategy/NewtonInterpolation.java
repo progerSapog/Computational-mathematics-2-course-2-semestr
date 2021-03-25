@@ -54,7 +54,7 @@ public class NewtonInterpolation implements SolutionStrategy
     }
 
     /**
-     * Метод для вычисления приближенного ответа при интерполяции вперед
+     * Метод для вычисления приближенного значения функции при интерполяции вперед
      *
      * @param t                 - значения параметра t, зависящее от координаты Х, в
      *                            которой ищется значение
@@ -91,7 +91,7 @@ public class NewtonInterpolation implements SolutionStrategy
     }
 
     /**
-     * Метод для вычисления приближенного ответа при интерполяции назад
+     * Метод для вычисления приближенного значения функции при интерполяции назад
      *
      * @param t                 - значения параметра t, зависящее от координаты Х, в
      *                            которой ищется значение
@@ -154,7 +154,7 @@ public class NewtonInterpolation implements SolutionStrategy
      * @param coordinates   - двумерный массив значений [0][Xi] [1][Yi]
      * @param desiredValues - массив значений Xi, в которых необходимо найти значений функций
      *
-     * @return массив значений, являющимися значениями функции в заданных точках.
+     * @return список значений функции в заданных точках.
      * */
     @Override
     public List<Double> getSolution(double[][] coordinates, double[] desiredValues)
