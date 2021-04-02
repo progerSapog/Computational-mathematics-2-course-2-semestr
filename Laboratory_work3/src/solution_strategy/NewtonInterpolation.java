@@ -195,21 +195,21 @@ public class NewtonInterpolation implements SolutionStrategy
         //Вывод "лестницы" конечных разностей
         printFiniteDifferences(finiteDifferences);
 
-        //Вычисление середины отрезка переданных X
-        double midpoint = (coordinates[0][0] + coordinates[coordinates.length - 1][0]) / 2;
-
         //Вычисление шага h
         double h = coordinates[1][0] - coordinates[0][0];
 
         //Перемнная для хранения параметра t
         double t;
 
+        //Вычисление середины отрезка переданных X
+        double midPoint = (coordinates[0][0] + coordinates[coordinates.length - 1][0]) / 2;
+
         //Для каждого числа из массива Хi, в которых необходимо найти значения функции
         //находим значения функции
         for (double desiredValue : desiredValues)
         {
             //Если Xi лежит в промежутке [x0; (x0 + xn) / 2]
-            if (desiredValue < midpoint)
+            if (desiredValue < midPoint)
             {
                 //t вычисляется как (x - x0)/h
                 t = (desiredValue - coordinates[0][0]) / h;

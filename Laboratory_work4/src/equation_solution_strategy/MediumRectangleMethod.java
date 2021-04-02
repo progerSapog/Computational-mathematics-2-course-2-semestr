@@ -22,20 +22,20 @@ public class MediumRectangleMethod implements SolutionStrategy
      * @param function           - функция, для которой необходимо вычислить интеграл
      * @param a                  - нижний  предел интегрирования
      * @param b                  - верхний предел интегрирования
-     * @param numberOfIterations - кол-во итераций
+     * @param n                  - кол-во интервалов разбиения
      * @return значение инетграла для данной функции.
      * */
     @Override
-    public double getSolution(Function function, double a, double b, double numberOfIterations)
+    public double getSolution(Function function, double a, double b, double n)
     {
         //Вычисляем величену шага h
-        double h = (b - a)/numberOfIterations;
+        double h = (b - a)/n;
 
         //пеменная для хранения значения интеграла
         double res = 0.0;
 
         //Вычисляем сумму значений функции в промежутках
-        for (int i = 0; i < numberOfIterations; i++)
+        for (int i = 0; i < n; i++)
         {
             //К результату прибавляем значение f(Xi-1/2)
             //Начальная точка a, последующие шаги вычисляются как: h * (i + 0.5)
@@ -55,19 +55,19 @@ public class MediumRectangleMethod implements SolutionStrategy
      * @param function           - функция, для которой необходимо вычислить интеграл
      * @param a                  - нижний  предел интегрирования
      * @param b                  - верхний предел интегрирования
-     * @param numberOfIterations - кол-во итераций
+     * @param n                  - кол-во интервалов разбиения
      * @return значение инетграла для данной функции.
      * */
     @Override
-    public double getError(Function function, double a, double b, double numberOfIterations)
+    public double getError(Function function, double a, double b, double n)
     {
         List<Double> yList = new LinkedList<>();
 
         //Вычисляем величену шага h
-        double h = (b - a)/numberOfIterations;
+        double h = (b - a)/ n;
 
         //Получаем список значений второй производной в промежутках
-        for (int i = 0; i < numberOfIterations; i++)
+        for (int i = 0; i < n; i++)
         {
             //Получаем значения второй производной функциий в точках от a до b с шагом h
             yList.add(function.getSecDerivativeAtX(a + h * (i)));

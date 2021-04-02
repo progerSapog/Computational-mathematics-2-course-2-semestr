@@ -18,10 +18,10 @@ public interface SolutionStrategy
      * @param function           - функция, для которой необходимо вычислить интеграл
      * @param a                  - нижний  предел интегрирования
      * @param b                  - верхний предел интегрирования
-     * @param numberOfIterations - кол-во итераций
+     * @param n                  - кол-во интервалов разбиения
      * @return значение инетграла для данной функции.
      * */
-    double getSolution(Function function, double a, double b, double numberOfIterations);
+    double getSolution(Function function, double a, double b, double n);
 
     /**
      * Метод для вычисления значения погрешности.
@@ -29,8 +29,8 @@ public interface SolutionStrategy
      * @param function           - функция, для которой необходимо вычислить интеграл
      * @param a                  - нижний  предел интегрирования
      * @param b                  - верхний предел интегрирования
-     * @param numberOfIterations - кол-во итераций
+     * @param n                  - кол-во интервалов разбиения
      * @return значение инетграла для данной функции.
      * */
-    double getError(Function function, double a, double b, double numberOfIterations);
+    double getError(Function function, double a, double b, double n);
 }

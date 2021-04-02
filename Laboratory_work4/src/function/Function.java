@@ -1,7 +1,5 @@
 package function;
 
-import java.util.List;
-
 /**
  * Интерфейс реализующий основные методы функций любого вида.
  *

@@ -22,14 +22,14 @@ public class SimpsonMethod implements SolutionStrategy
      * @param function           - функция, для которой необходимо вычислить интеграл
      * @param a                  - нижний  предел интегрирования
      * @param b                  - верхний предел интегрирования
-     * @param numberOfIterations - кол-во итераций
+     * @param n                  - кол-во интервалов разбиения
      * @return значение инетграла для данной функции.
      * */
     @Override
-    public double getSolution(Function function, double a, double b, double numberOfIterations)
+    public double getSolution(Function function, double a, double b, double n)
     {
         //Вычисляем величену шага h
-        double h = (b - a)/numberOfIterations;
+        double h = (b - a)/ n;
 
         //Переменная для хранения суммы нечетных y
         double evenY = 0.0;
@@ -38,19 +38,19 @@ public class SimpsonMethod implements SolutionStrategy
         double oddY  = 0.0;
 
         //Вычисление суммы y1 + y3 + ... + yn-1
-        for (int i = 1; i < numberOfIterations; i++)
+        for (int i = 1; i < n; i++)
         {
             if (i % 2 != 0) oddY  += function.getValueAtX(a + i*h);
         }
 
         //Вычисление суммы y2 + y4 + ... + yn-2
-        for (int i = 2; i < (numberOfIterations - 1); i++)
+        for (int i = 2; i < (n - 1); i++)
         {
             if (i % 2 == 0) evenY += function.getValueAtX(a + i*h);
         }
 
         //Возвращение результата
-        // h/3(y0 + 4*(y1 + y3 + ... + yn-1) + 2*(y2 + y4 + ... + yn-2) - yn)
+        // h/3(y0 + 4*(y1 + y3 + ... + yn-1) + 2*(y2 + y4 + ... + yn-2) + yn)
         return (h / 3.0) * (function.getValueAtX(a) + 4.0 * oddY + 2.0 * evenY + function.getValueAtX(b));
     }
 
@@ -61,19 +61,19 @@ public class SimpsonMethod implements SolutionStrategy
      * @param function           - функция, для которой необходимо вычислить интеграл
      * @param a                  - нижний  предел интегрирования
      * @param b                  - верхний предел интегрирования
-     * @param numberOfIterations - кол-во итераций
+     * @param n                  - кол-во интервалов разбиения
      * @return значение инетграла для данной функции.
      * */
     @Override
-    public double getError(Function function, double a, double b, double numberOfIterations)
+    public double getError(Function function, double a, double b, double n)
     {
         List<Double> yList = new LinkedList<>();
 
         //Вычисляем величену шага h
-        double h = (b - a)/numberOfIterations;
+        double h = (b - a)/ n;
 
         //Вычисляем значения второй производной в промежутках
-        for (int i = 0; i < numberOfIterations; i++)
+        for (int i = 0; i < n; i++)
         {
             //Получаем значения второй производной функциий в точках от a до b с шагом h
             yList.add(function.getThirdDerivativeAtX(a + h * (i)));
@@ -82,7 +82,7 @@ public class SimpsonMethod implements SolutionStrategy
         //Находим максимальное значение второй производной на промежутке от a до b
         double error = Math.abs(Collections.max(yList));
 
-        //Вычисляем погрешность: Rn = (b-a)/24 * h^2 * max(f''(x))
+        //Вычисляем погрешность: Rn = (b-a)/288 * h^3 * max(f'''(x))
         error *= ((b - a) / 288.0) * h * h * h;
 
         return error;

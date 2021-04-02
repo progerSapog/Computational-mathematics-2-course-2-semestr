@@ -150,9 +150,6 @@ public class Main
             ch = scanner.nextLine();
             System.out.println();
 
-            //Засекаем время до начала решения
-            double start = System.currentTimeMillis();
-
             //Ввод с повторением
             switch (ch)
             {
@@ -194,9 +191,6 @@ public class Main
                 default -> System.out.println(RED + "Неверный ввод!" + RESET);
             }
 
-            //Засекаем время после конца решения
-            double end = System.currentTimeMillis();
-
             assert resList != null;
             //Выводим получившиеся ответы
             System.out.println();
@@ -208,9 +202,6 @@ public class Main
             System.out.printf("y" + (resList.size()) + ": %.5f", resList.get(resList.size() - 1));
             System.out.println();
 
-            //Выводим затраченное время для данного решения
-            System.out.println("Затраченное время: " + CYAN + (end - start) / 1000.0 + RESET + " секунд");
-            System.out.println();
         }
     }
 
