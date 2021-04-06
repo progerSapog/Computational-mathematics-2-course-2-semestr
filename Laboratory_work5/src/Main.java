@@ -1,5 +1,8 @@
+import equation_solution_strategy.MediumRectangleMethod;
+import equation_solution_strategy.SimpsonMethod;
+import equation_solution_strategy.SolutionStrategy;
+import equation_solution_strategy.TrapeziumMethod;
 import function.TrigonometricFunction;
-import equation_solution_strategy.*;
 
 import java.util.Scanner;
 
