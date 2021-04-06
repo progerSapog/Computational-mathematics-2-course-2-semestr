@@ -1,24 +1,42 @@
-import equation_solution_strategy.MediumRectangleMethod;
-import equation_solution_strategy.SimpsonMethod;
-import equation_solution_strategy.SolutionStrategy;
-import equation_solution_strategy.TrapeziumMethod;
-import function.TrigonometricFunction;
+import solution_strategy.*;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
- * Класс, содержащий точку входа в программу - метод main.
+ * Класс, содержащий точку входа в программу - метод  main.
  * Язык: java
  *
- * Реализация четвертой лабораторной работы по диспилине:
- *     Вычислительная математика
+ * Реализация пятой лабораторной работы по диспилине: Вычислительная математика
+ * Вариант №15
  *
  * Текст задания:
- *  Вычислить интеграл по формулам центральных (средних) прямоугольников,
- *  трапеций и формуле Симпсона, при n=8 и n=20; оценить погрешность результата.
+ *  Найти первую и вторую производную функции в точках х, заданных
+ *  таблицей, используя интерполяционные многочлены Ньютона. Сравнить со
+ *  значениями производных, вычисленными по формулам, основанным на
+ *  интерполировании многочленом Лагранжа (вычисление производных через
+ *  значения функций).
  *
- * @release: 01.04.21
- * @last_update: 01.04.21
+ *            x        y
+ *          3.50    33.1154
+ *          3.55    34.8133
+ *          3.60    36.5982
+ *          3.65    38.4747
+ *          3.70    40.4473
+ *          3.75    42.5211
+ *          3.80    44.7012
+ *          3.85    46.9931
+ *          3.90    49.4024
+ *          3.95    51.9354
+ *          4.00    54.5982
+ *          4.05    57.3975
+ *          4.10    60.3403
+ *          4.15    63.4340
+ *          4.20    66.6863
+ *
+ *
+ * @release: -     06.04.21
+ * @last_update: - 06.04.21
  *
  * @author Vladislav Sapozhnikov 19-IVT-3
  */
@@ -35,86 +53,124 @@ public class Main
      * */
     public static void main(String[] args)
     {
-        System.out.println("\t\t\t\tЛабораторная работа №4 <<" + PURPLE + "Численное интегрирование функций" +
+        System.out.println("\t\t\t\tЛабораторная работа №5 <<" + PURPLE + "«Численное дифференцирование функций»" +
                 RESET + ">>");
 
-        //Создаем объект функцию
-        TrigonometricFunction function = new TrigonometricFunction();
-
-        //Открываем поток ввода
+        //Открытие потока ввода
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Программа для вычисления интеграла функций методами средний " +
-                "прямоугольников, трапеций и методом Симпсона.");
-        System.out.println("\tФункция: cos(x^2)/(x+1)");
-        System.out.println();
+        //Таблица значений Вариант №15
+        double[][] coordinates = {{3.50, 33.1154},
+                                 {3.55, 34.8133},
+                                 {3.60, 36.5982},
+                                 {3.65, 38.4747},
+                                 {3.70, 40.4473},
+                                 {3.75, 42.5211},
+                                 {3.80, 44.7012},
+                                 {3.85, 46.9931},
+                                 {3.90, 49.4024},
+                                 {3.95, 51.9354},
+                                 {4.00, 54.5982},
+                                 {4.05, 57.3975},
+                                 {4.10, 60.3403},
+                                 {4.15, 63.4340},
+                                 {4.20, 66.6863}};
 
-        //Ввод нижней и верхней границы интегрирования
-        System.out.print("Введите нижнию  границу интегрирования: ");
-        double a = scanner.nextDouble();
+//        double[][] coordinates = {{0.01, 0.991824},
+//                {0.06, 0.951935},
+//                {0.11, 0.913650},
+//                {0.16, 0.876905},
+//                {0.21, 0.841638},
+//                {0.26, 0.807789},
+//                {0.31, 0.775301},
+//                {0.36, 0.744120},
+//                {0.41, 0.714193},
+//                {0.46, 0.685470},
+//                {0.51, 0.657902},
+//                {0.56, 0.631442}};
 
-        System.out.print("Введите верхнюю границу интегрирования: ");
-        double b = scanner.nextDouble();
-
-        //Ввод кол-во итераций
-        System.out.print("Введите кол-во итервалов разбиения (n): ");
-        double numberOfIterations = scanner.nextDouble();
-        System.out.println();
+//        double[][] coordinates = {{0.0, 1.2833},
+//                {0.1, 1.8107},
+//                {0.2, 2.3606},
+//                {0.3, 2.9577},
+//                {0.4, 3.5969},
+//                {0.5, 4.2833}};
 
         //Создание ссылки на объект, реализующий интерфейс
         //SolutionStrategy
         SolutionStrategy strategy = null;
 
         //Переменная для хранения результата ввода
-        String ch;
+        String ch = "";
 
-        //Сброс потока ввода
-        ch = scanner.nextLine();
+        System.out.println("Заданная таблица координат: ");
+        printCoordinates(coordinates);
 
         //Выбор стратегии решения
         while (!ch.equals("q"))
         {
-            System.out.println("Выберите метод для решения уранвения:");
-            System.out.println("\t1. Метод средних прямоугольников");
-            System.out.println("\t2. Метод трапеций");
-            System.out.println("\t3. Метод Симпсона");
-            System.out.println();
-            System.out.println("\t#. Изменить кол-во итервалов разбиения (n): ");
+            System.out.println("Выберите метод:");
+            System.out.println("\t1. Дифференцирование многочленом Ньютона");
             System.out.println();
             System.out.println("\tВведите q для выхода");
             System.out.print("Ввод: ");
             ch = scanner.nextLine();
             System.out.println();
 
+            //Ввод с повторением
             switch (ch)
             {
-                case ("1") -> strategy = new MediumRectangleMethod();
-                case ("2") -> strategy = new TrapeziumMethod();
-                case ("3") -> strategy = new SimpsonMethod();
-                case ("#") -> {
-                                   System.out.print("Введите кол-во итервалов разбиения (n): ");
-                                   numberOfIterations = scanner.nextInt();
-                                   scanner.nextLine();
-                                   continue;
-                              }
-                case ("q") -> {
-                                   System.out.println(RED + "Завершение работы..." + RESET);
-                                   System.exit(0);
-                              }
-                default    -> System.out.println(RED + "Неверный ввод!" + RESET);
+                case ("1") -> strategy = new NewtonDerivativesFiveDifferences();
+                case ("q") ->
+                {
+                    System.out.println(RED + "Завершение работы..." + RESET);
+                    System.exit(0);
+                }
+                default -> System.out.println(RED + "Неверный ввод!" + RESET);
             }
+            System.out.println();
 
-            //Получаем значение интеграла
             assert strategy != null;
-            double res = strategy.getSolution(function, a, b, numberOfIterations);
+            List<Double> firstDerivatives  = strategy.getFirstDerivative(coordinates);
+            List<Double> secondDerivatives = strategy.getSecondDerivative(coordinates);
 
-            //Получаем значение погрешности
-            double error = strategy.getError(function, a, b, numberOfIterations);
+            System.out.println("Значения первой производной: ");
+            for (int i = 0; i < coordinates.length; i++)
+            {
+                System.out.printf("%.2f", coordinates[i][0]);
+                System.out.print(" | ");
+                System.out.printf("%.4f", firstDerivatives.get(i));
+                System.out.println();
+            }
+            System.out.println();
 
-            System.out.print("Значение интеграла:   ");
-            System.out.printf("%.8f" + "\n", res);
-            System.out.print("Значение погрешности: " + RED);
-            System.out.printf("%.8f" + RESET + "\n\n", error);
+            System.out.println("Значения второй производной: ");
+            for (int i = 0; i < secondDerivatives.size(); i++)
+            {
+                System.out.printf("%.2f", coordinates[i][0]);
+                System.out.print(" | ");
+                System.out.printf("%.4f", secondDerivatives.get(i));
+                System.out.println();
+            }
         }
+    }
+
+    /**
+     * Метод для вывода таблицы заданных точек.
+     *
+     * @param coordinates   - двумерный массив значений [0][Xi] [1][Yi]
+     * */
+    public static void printCoordinates(double[][] coordinates)
+    {
+        System.out.println("     f(x)");
+        System.out.println("  Xi |  =  Yi");
+        for (double[] coordinate : coordinates)
+        {
+            System.out.printf("%.2f", coordinate[0]);
+            System.out.print(" | ");
+            System.out.printf("%.4f", coordinate[1]);
+            System.out.println();
+        }
+        System.out.println();
     }
 }
