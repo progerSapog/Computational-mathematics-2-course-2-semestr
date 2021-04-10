@@ -6,8 +6,7 @@ import java.util.List;
  * Общий интерфейс всех стратегий решения.
  *
  * @author Vladislav Sapozhnikov 19-IVT-3
- * @see NewtonDerivativesFiveDifferences
- * @see LagrangianInterpolationUnequallyNodes
+ * @see NewtonDerivatives
  * */
 public interface SolutionStrategy
 {

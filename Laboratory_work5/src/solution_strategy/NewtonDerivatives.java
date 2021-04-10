@@ -13,7 +13,7 @@ import java.util.List;
  * @author Vladislav Sapozhnikov 19-IVT-3
  * @see SolutionStrategy
  * */
-public class NewtonDerivativesFiveDifferences implements SolutionStrategy
+public class NewtonDerivatives implements SolutionStrategy
 {
     /**
      * Вспомогательный метод для вывода конечных разностей i-ого порядка
@@ -74,6 +74,12 @@ public class NewtonDerivativesFiveDifferences implements SolutionStrategy
         return res;
     }
 
+    /**
+     * Вспомогательный метод для получения конечных разностей.
+     *
+     * @param coordinates - массив координат узлов интерполяции.
+     * @return список списков конечных разностей
+     * */
     private List<List<Double>> getFiniteDifferences(double[][] coordinates)
     {
         //Создание списка списков для хранения значений конченых разностей
@@ -110,38 +116,15 @@ public class NewtonDerivativesFiveDifferences implements SolutionStrategy
         return finiteDifferences;
     }
 
+    /**
+     * Метод получения первой производной при помощи интерполяции многочленом
+     * Ньютона.
+     *
+     * @param coordinates - массив координат узлов интерполяции.
+     * @return список значений 1ой производной в заданных Х-ах
+     * */
     @Override
     public List<Double> getFirstDerivative(double[][] coordinates)
-    {
-        //Получение конечных разностей и их вывод
-        List<List<Double>> finiteDifferencesList = getFiniteDifferences(coordinates);
-
-        List<Double> resList = new ArrayList<>();
-
-        //Вычисление шага h
-        double h = coordinates[1][0] - coordinates[0][0];
-        double t;
-        double res;
-
-        for (int i = coordinates.length - 1; i >= 0; i--)
-        {
-            t    = (coordinates[i][0] - coordinates[0][0]) / h;
-            res  = finiteDifferencesList.get(0).get(0);
-
-            res += ((2.0 * t - 1.0) * finiteDifferencesList.get(1).get(0) / getFact(2)) ;
-            res += ((3.0 * t*t - 6.0 * t + 2.0)  * finiteDifferencesList.get(2).get(0) / getFact(3));
-            res += ((4.0 * t*t*t - 18.0 * t*t + 22.0 * t - 6.0) * finiteDifferencesList.get(3).get(0) / getFact(4));
-            res += ((5.0 * t*t*t*t - 40.0 * t*t*t + 105.0 * t*t - 100.0 * t + 24.0)  * finiteDifferencesList.get(4).get(0) / getFact(5));
-
-            res = res / h;
-            resList.add(res);
-        }
-
-        return resList;
-    }
-
-    @Override
-    public List<Double> getSecondDerivative(double[][] coordinates)
     {
         //Получение конечных разностей и их вывод
         List<List<Double>> finiteDifferencesList = getFiniteDifferences(coordinates);
@@ -151,18 +134,75 @@ public class NewtonDerivativesFiveDifferences implements SolutionStrategy
 
         //Вычисление шага h
         double h = coordinates[1][0] - coordinates[0][0];
+
         double t;
         double res;
 
-        for (int i = 0; i < coordinates.length; i++)
+        for (double[] coordinate : coordinates)
         {
-            t    = (coordinates[i][0] - coordinates[0][0]) / h;
-            res  = finiteDifferencesList.get(1).get(0);
+            //Вычисление параметра t, зависящего от h
+            t = (coordinate[0] - coordinates[0][0]) / h;
 
-            res += ((6.0 * t - 6.0) * finiteDifferencesList.get(2).get(0)) / getFact(3);
-            res += ((12.0 * t*t - 36.0 * t + 22.0) * finiteDifferencesList.get(3).get(0)) / getFact(4);
-            res += ((20.0 * t*t*t - 120.0 * t*t + 210.0 * t -100) * finiteDifferencesList.get(4).get(0)) / getFact(5);
-            res /= (h *h);
+            //к результату прибавляем Δy0
+            res = finiteDifferencesList.get(0).get(0);
+
+            //прибавляем к результату последующие слагаемые до Δ^5y0
+            res += ((2.0 * t - 1.0) * finiteDifferencesList.get(1).get(0)
+                    / getFact(2));
+            res += ((3.0 * t * t - 6.0 * t + 2.0) * finiteDifferencesList.get(2).get(0)
+                    / getFact(3));
+            res += ((4.0 * t * t * t - 18.0 * t * t + 22.0 * t - 6.0) * finiteDifferencesList.get(3).get(0)
+                    / getFact(4));
+            res += ((5.0 * t * t * t * t - 40.0 * t * t * t + 105.0 * t * t - 100.0 * t + 24.0) * finiteDifferencesList.get(4).get(0)
+                    / getFact(5));
+
+            //Делим полученный результат на h, т.к. узлы равноотстоящие
+            res /= h;
+
+            //Заносим результат в список ответов
+            resList.add(res);
+        }
+
+        return resList;
+    }
+
+    /**
+     * Метод получения второ1 производной при помощи интерполяции многочленом
+     * Ньютона.
+     *
+     * @param coordinates - массив координат узлов интерполяции.
+     * @return список значений 2ой производной в заданных Х-ах
+     * */
+    @Override
+    public List<Double> getSecondDerivative(double[][] coordinates)
+    {
+        //Получение конечных разностей и их вывод
+        List<List<Double>> finiteDifferencesList = getFiniteDifferences(coordinates);
+
+        List<Double> resList = new ArrayList<>();
+
+        //Вычисление шага h
+        double h = coordinates[1][0] - coordinates[0][0];
+        double t;
+        double res;
+
+        for (double[] coordinate : coordinates)
+        {
+            //Вычисление параметра t, зависящего от h
+            t = (coordinate[0] - coordinates[0][0]) / h;
+
+            //к результату прибавляем Δ^2y0
+            res = finiteDifferencesList.get(1).get(0);
+
+            //прибавляем к результату последующие слагаемые до Δ^5y0
+            res += ((6.0 * t - 6.0) * finiteDifferencesList.get(2).get(0))
+                    / getFact(3);
+            res += ((12.0 * t*t - 36.0 * t + 22.0) * finiteDifferencesList.get(3).get(0))
+                    / getFact(4);
+            res += ((20.0 *t*t*t - 120.0 * t*t + 210.0 * t -100.0) * finiteDifferencesList.get(4).get(0)
+                    / getFact(5));
+
+            res /= (h * h);
             resList.add(res);
         }
 
@@ -172,7 +212,7 @@ public class NewtonDerivativesFiveDifferences implements SolutionStrategy
     /**
      * Конструктор без параметров.
      * */
-    public NewtonDerivativesFiveDifferences()
+    public NewtonDerivatives()
     {
     }
 }
