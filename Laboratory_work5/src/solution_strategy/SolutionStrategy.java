@@ -3,6 +3,9 @@ package solution_strategy;
 /**
  * Общий интерфейс всех стратегий решения.
  *
+ * @see DifferenceForm
+ * @see LagrangianSolution
+ * @see NewtonSolution
  * @author Vladislav Sapozhnikov 19-IVT-3
  * */
 public interface SolutionStrategy

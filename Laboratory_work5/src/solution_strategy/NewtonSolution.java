@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс, в котором ерализованы методы нахождения
+ * Класс, в котором реализованы методы нахождения
  * первых и вторых произовдных при помощи многочлена Ньютона
+ *
+ * @see SolutionStrategy
  * */
 public class NewtonSolution implements SolutionStrategy
 {
@@ -75,6 +77,10 @@ public class NewtonSolution implements SolutionStrategy
     /**
      * Метод для получения первых проиводных при помощи
      * многочлена Ньютона
+     *
+     * @param coordinates - массив координат точек, в которых
+     *                      необходимо найти проиводные
+     * @return массив значений первых производных
      * */
     @Override
     public double[][] getFirstDerivative(double[][] coordinates)
@@ -162,20 +168,33 @@ public class NewtonSolution implements SolutionStrategy
         return resArr;
     }
 
+    /**
+     * Метод для получения вторых производных при помощи
+     * многочлена Ньютона
+     *
+     * @param coordinates - массив координат точек, в которых
+     *                      необходимо найти производные
+     * @return массив значений вторых производных
+     * */
     @Override
     public double[][] getSecondDerivative(double[][] coordinates)
     {
+        //Вычисление шага
         double h = coordinates[1][0] - coordinates[0][0];
         double[][] resArr = new double[15][2];
 
-
+        //Нахождение производных для первых 6ти членов
+        //выделяем координаты необходимых точек
         double[][] tempArr = new double[6][2];
         for (int i = 0; i < 6; i++)
         {
             tempArr[i][0] = coordinates[i][0];
             tempArr[i][1] = coordinates[i][1];
         }
+        //Получаем список конечных приращений
         List<List<Double>> finiteDifference = getFiniteDifferences(tempArr);
+
+        //Расчет производных по формуле
         for (int i = 0; i < 6; i++)
         {
             double t = (coordinates[i][0] - coordinates[0][0]) / h;
@@ -189,13 +208,18 @@ public class NewtonSolution implements SolutionStrategy
         }
 
 
+        //Нахождение производных для следующих 3 членов
+        //выделяем координаты необходимых точек
         tempArr = new double[6][2];
         for (int i = 6, j = 0; i < 12; i++, j++)
         {
             tempArr[j][0] = coordinates[i][0];
             tempArr[j][1] = coordinates[i][1];
         }
+        //Получаем список конечных приращений
         finiteDifference = getFiniteDifferences(tempArr);
+
+        //Расчет производных по формуле
         for (int i = 6; i < 10; i++)
         {
             double t = (coordinates[i][0] - coordinates[6][0]) / h;
@@ -208,14 +232,18 @@ public class NewtonSolution implements SolutionStrategy
                     / (h*h);
         }
 
-
+        //Нахождение производных для последних 6ти членов
+        //выделяем координаты необходимых точек
         tempArr = new double[6][2];
         for (int i = 9, j = 0; i < 15; i++, j++)
         {
             tempArr[j][0] = coordinates[i][0];
             tempArr[j][1] = coordinates[i][1];
         }
+        //Получаем список конечных приращений
         finiteDifference = getFiniteDifferences(tempArr);
+
+        //Расчет производных по формуле
         for (int i = 9; i < 15; i++)
         {
             double t = (coordinates[i][0] - coordinates[9][0]) / h;
@@ -231,36 +259,3 @@ public class NewtonSolution implements SolutionStrategy
         return resArr;
     }
 }
-
-//    private void printFiniteDifferences(List<List<Double>> finiteDifferences)
-//    {
-//        for (int i = 0; i < finiteDifferences.size(); i++)
-//        {
-//            //Если выводимое число будет меньше 10, то задаем дополнительный пробел
-//            //перед его выводом для равномерного отображения в консоли
-//            if (i < 9)
-//            {
-//                System.out.print("Конечные разности  " + (i+1) + " порядка: ");
-//            }
-//            else
-//            {
-//                System.out.print("Конечные разности " + (i+1) + " порядка: ");
-//            }
-//
-//            for (int j = 0; j < finiteDifferences.get(i).size(); j++)
-//            {
-//                //Если число меньше 0 то выводим как оно есть,
-//                //иначе задаем дополнительный пробле для равномерного вывода в консоль
-//                if (finiteDifferences.get(i).get(j) < 0)
-//                {
-//                    System.out.printf("%.5f", finiteDifferences.get(i).get(j));
-//                }
-//                else
-//                {
-//                    System.out.printf(" %.5f", finiteDifferences.get(i).get(j));
-//                }
-//                System.out.print(" ");
-//            }
-//            System.out.println();
-//        }
-//    }
