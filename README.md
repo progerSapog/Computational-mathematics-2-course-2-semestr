@@ -11,4 +11,4 @@
 + [Лабораторная работа №3.](https://github.com/progerSapog/Computational-mathematics-2-course-2-semestr/tree/main/Laboratory_work3) Интерполирование функции многочленом Ньютона и многочленом Лагранжа  
 + [Лабораторная работа №4.](https://github.com/progerSapog/Computational-mathematics-2-course-2-semestr/tree/main/Laboratory_work4) Численное интегрирование функций
 + [Лабораторная работа №5.](https://github.com/progerSapog/Computational-mathematics-2-course-2-semestr/tree/main/Laboratory_work5) Численное дифференциирование функций
-+ [Лабораторная работа №6.](https://github.com/progerSapog/Computational-mathematics-2-course-2-semestr/tree/main/Laboratory_work6) прибилежнное решение обыкновенных дифференциальных уравнений
++ [Лабораторная работа №6.](https://github.com/progerSapog/Computational-mathematics-2-course-2-semestr/tree/main/Laboratory_work6) Прибилежнное решение обыкновенных дифференциальных уравнений
