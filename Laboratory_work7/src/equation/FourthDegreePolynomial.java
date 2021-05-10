@@ -3,16 +3,22 @@ package equation;
 import java.util.*;
 
 /**
- * Класс Нелинейных уравнений третьей степени.
+ * Класс уравнений четвертой степени.
  * Реализует интерфейс Equation
  *
  * @author Vladislav Sapozhnikov 19-IVT-3
  * @see Equation
  * */
-public class NoLinearThirdDegreeEquation implements Equation
+public class FourthDegreePolynomial implements Equation
 {
-    private double[] coefficients = new double[4];
+    //перемнная для хранения коэфициентов уравнения
+    private final double[] coefficients = new double[4];
 
+    /**
+     * Метод для задания коэфициентов.
+     *
+     * @param coefficients - коэфифиценты, которые необходимо задать
+     * */
     @Override
     public void setCoefficients(double[] coefficients)
     {
@@ -33,7 +39,12 @@ public class NoLinearThirdDegreeEquation implements Equation
                 coefficients[2]*x + coefficients[3];
     }
 
-    public List<List<Double>> getIntervalsOfMonotony()
+    /**
+     * Метод для получения интервалов смены знаков функции.
+     *
+     * @return список пар чисел - интервалов, в которых функция меняет знак.
+     * */
+    public List<List<Double>> getIntervals()
     {
         List<Double> xList = new LinkedList<>();
         List<Double> yList = new LinkedList<>();
@@ -63,8 +74,10 @@ public class NoLinearThirdDegreeEquation implements Equation
             }
         }
 
+        //Сортировка по возрастанию
         Collections.sort(newList);
 
+        //Записываем по парам полученные значения
         List<List<Double>> cordList = new ArrayList<>();
         for (int i = 0; i < newList.size(); i += 2)
         {
@@ -82,7 +95,16 @@ public class NoLinearThirdDegreeEquation implements Equation
     /**
      * Конуструктор без параметров
      * */
-    public NoLinearThirdDegreeEquation()
+    public FourthDegreePolynomial()
     {
+    }
+
+    /**
+     * Метод для вывода уравнения в консоль.
+     * */
+    @Override
+    public void printEquation()
+    {
+        System.out.printf("λ^4 %.4fλ^3 + %.4fλ^2 + %.4fλ %.4f = 0", coefficients[0], coefficients[1], coefficients[2], coefficients[3]);
     }
 }

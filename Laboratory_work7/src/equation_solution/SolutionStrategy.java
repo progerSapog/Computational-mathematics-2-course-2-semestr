@@ -1,4 +1,4 @@
-package equation_solution_strategy;
+package equation_solution;
 
 import equation.Equation;
 

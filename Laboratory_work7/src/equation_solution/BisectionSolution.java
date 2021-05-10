@@ -1,4 +1,4 @@
-package equation_solution_strategy;
+package equation_solution;
 
 import equation.Equation;
 
@@ -31,7 +31,7 @@ public class BisectionSolution implements SolutionStrategy
 
         //Получение списка интервалов монотонности, которые содержат
         //решения
-        List<List<Double>> intervals = equation.getIntervalsOfMonotony();
+        List<List<Double>> intervals = equation.getIntervals();
 
         //Проход по каждому интервалу [a;b]
         for (List<Double> interval: intervals)

@@ -11,11 +11,10 @@ import java.util.List;
  * Содержит 4 метода необходимых для данной лабораторной работы:
  *  - задание коэффициентов уравнения
  *  - получение значения функции в точке
- *  - получение значения первой производной в точке
- *  - получение значения второй производной в точке
+ *  - получение интервалов монотонности
  *
  * @author Vladislav Sapozhnikov 19-IVT-3
- * @see NoLinearThirdDegreeEquation
+ * @see FourthDegreePolynomial
  * */
 public interface Equation
 {
@@ -35,10 +34,15 @@ public interface Equation
     double getValueAtX(double x);
 
     /**
-     * Метод для получения списка интервалов монотонности.
+     * Метод для получения списка интервалов где функция меняет знак.
      *
      * @return список из чисел, которые составляют отрезки монотонности
      *         типа [i; i+1]
      * */
-    List<List<Double>> getIntervalsOfMonotony();
+    List<List<Double>> getIntervals();
+
+    /**
+     * Метод вывода уравнения в консоль
+     * */
+    void printEquation();
 }
