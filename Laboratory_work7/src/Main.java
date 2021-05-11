@@ -34,8 +34,18 @@ import java.util.List;
  */
 public class Main
 {
+    //Константы для хранения последовательностей для
+    //изменения цвета текста в консоли
+    public static final String RESET = "\u001B[0m";
+    public static final String PURPLE = "\u001B[35m";
+
+    /**
+     * Точка входа в программу
+     * */
     public static void main(String[] args)
     {
+        System.out.println("\t\t\t\tЛабораторная работа №7 <<" + PURPLE + "Определение собственных чисел и собственных" +
+                " векторов матрицы методом Крылова»" + RESET + ">>");
         double[] y0, y1, y2, y3, y4;
 
         //задаем вектор y0
